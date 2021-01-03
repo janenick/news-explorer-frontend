@@ -1,6 +1,8 @@
 {
-  "name": "news-explorer-react",
+  "name": "news-explorer-react-frontend",
   "version": "0.1.0",
+  "description": "Learning project",
+  "author": "Evgeniya Nikitina",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.8",
@@ -41,7 +43,6 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-react": "^7.21.5",
     "gh-pages": "^3.1.0"
   }
 }
