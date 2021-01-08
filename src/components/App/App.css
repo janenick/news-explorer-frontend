@@ -1,0 +1,31 @@
+.page {
+background-color: #FFFFFF;
+  color: #1a1b22;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  max-width: 1440;
+  margin: 0 auto;
+}
+
+.section {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 640px) {
+  .section {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media screen and (max-width: 320) {
+  .section {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

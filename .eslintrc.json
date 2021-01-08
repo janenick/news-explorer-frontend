@@ -3,7 +3,6 @@
     "browser": true
   },
   "extends": [
-    "airbnb-base",
     "plugin:react/recommended"
   ],
   "plugins": ["react", "react-hooks"],
@@ -17,6 +16,7 @@
   "rules": {
     "no-underscore-dangle": "off",
     "no-console": "off",
+    "linebreak-style": 0,
     "react/prop-types": 0,
     "max-len": "off"
   }
