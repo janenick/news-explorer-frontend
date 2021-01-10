@@ -4,11 +4,12 @@ background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  max-width: 1440;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .section {
+  max-width: 1440px;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

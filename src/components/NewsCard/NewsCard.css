@@ -46,6 +46,17 @@
   position: absolute;
   top: 24px;
   left: 24px;
+    font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .news-card__keyword {
@@ -79,7 +90,7 @@
   margin-bottom: 0;
   width: 159px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 10px;
   position: absolute;
   top: 24px;
   right: 69px;
@@ -160,9 +171,17 @@ background-image: url(../../images/icons/bookmark-hover.svg);
 transition: 0.3s ease;
 }
 
-.news-card__btn:hover + .news-card__tooltip {
+.news-card__btn_type_trash:hover + .news-card__tooltip {
   display: flex;
   transition: 0.3s easy;
+}
+
+.news-card__btn_type_save:hover + .news-card__tooltip {
+  display: flex;
+  transition: 0.3s easy;
+  font-size: 10px;
+  line-height: 12px;
+  width: 182px;
 }
 
 

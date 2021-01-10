@@ -5,6 +5,7 @@ import './NewsCard.css';
 
 const NewsCard = ({ card, tooltip, iconSave }) => {
   // const currentUser = React.useContext(CurrentUserContext);
+
   const [isSavedMark, setIsSavedMark] = React.useState(false);
 
   function handleSavedMark() {
@@ -21,12 +22,9 @@ const NewsCard = ({ card, tooltip, iconSave }) => {
           <button type='button' className='news-card__btn news-card__btn_type_trash'></button>
         )
       }
-      <div className='news-card__keyword-container'>
-        <p className='news-card__keyword'>{card.keyword}</p>
-      </div>
       <div className='news-card__tooltip'>{tooltip}</div>
+      {!iconSave && <div className='news-card__keyword-container'>{card.keyword}</div>}
       <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
-
         <img className='news-card__img' src={card.image} alt={card.title} />
         <div className='news-card__info'>
           <p className='news-card__date'>{card.date}</p>
