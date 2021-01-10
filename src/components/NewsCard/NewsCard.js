@@ -3,45 +3,28 @@ import React from 'react';
 
 import './NewsCard.css';
 
-const NewsCard = (props) => {
+const NewsCard = ({ card, tooltip, iconSave }) => {
   // const currentUser = React.useContext(CurrentUserContext);
-  const { card } = props;
+  const [isSavedMark, setIsSavedMark] = React.useState(false);
 
-  /* // Определяем, являемся ли мы владельцем текущей карточки
-  // const isOwn = card.owner._id === currentUser._id;
-  const isOwn = String(card.owner) === currentUser._id;
-
-  // Создаём переменную, которую после зададим в `className` для кнопки удаления
-  const cardDeleteButtonClassName = (
-    `news-card__btn-trash ${isOwn ? 'news-card__btn-trash_active' : ''}`
-  );
-
-  // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = card.likes.some((i) => i === currentUser._id);
-  // Создаём переменную, которую после зададим в `className` для кнопки лайка
-  const cardLikeButtonClassName = (
-    `news-card__btn-like ${isLiked ? 'news-card__btn-like_active' : ''}`
-  );
-
-  function handleClick() {
-    props.onCardClick(card);
+  function handleSavedMark() {
+    isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
   }
 
-  function handleLikeClick() {
-    props.onCardLike(card);
-  }
-
-  function handleDeleteClick(evt) {
-    props.onCardDelete(evt, card);
-  }
-*/
   return (
     < li className='news-card'>
-      <button type='button' className='news-card__btn news-card__btn_type_trash'></button>
+      { iconSave
+        ? (
+          <button type='button' className={`news-card__btn ${isSavedMark ? 'news-card__btn_type_save-marked' : 'news-card__btn_type_save'}`} onClick={handleSavedMark}></button>
+        )
+        : (
+          <button type='button' className='news-card__btn news-card__btn_type_trash'></button>
+        )
+      }
       <div className='news-card__keyword-container'>
         <p className='news-card__keyword'>{card.keyword}</p>
       </div>
-      <p className='news-card__tooltip-text'>Убрать из сохраненных</p>
+      <div className='news-card__tooltip'>{tooltip}</div>
       <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
 
         <img className='news-card__img' src={card.image} alt={card.title} />
@@ -55,6 +38,7 @@ const NewsCard = (props) => {
       </a>
     </li>
   );
+
 };
 
 export default NewsCard;

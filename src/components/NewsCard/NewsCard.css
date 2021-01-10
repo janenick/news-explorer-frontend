@@ -62,25 +62,30 @@
   white-space: nowrap;
 }
 
-.news-card__tooltip-text {
+.news-card__tooltip {
   font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
+  align-items: center;
   text-align: center;
+  justify-content: center;
   color: #000000;
 
   background-color: #ffffff;
   box-sizing: border-box;
-  padding: 16px 12px;
   margin-top: 0;
   margin-bottom: 0;
+  width: 159px;
   height: 40px;
   border-radius: 8px;
   position: absolute;
   top: 24px;
   right: 69px;
+
+  display: none;
+  transition: 0.3s easy;
 }
 
 .news-card__date {
@@ -139,7 +144,7 @@ background-image: url(../../images/icons/trash.svg);
 
 .news-card__btn_type_trash:hover {
 background-image: url(../../images/icons/trash-hover.svg);
-transition: 0.3s ease;
+transition: 0.3s easy;
 }
 
 .news-card__btn_type_save {
@@ -150,10 +155,16 @@ background-image: url(../../images/icons/bookmark-normal.svg);
 background-image: url(../../images/icons/bookmark-marked.svg);
 }
 
-.card__btn_type_save:hover {
+.news-card__btn_type_save:hover {
 background-image: url(../../images/icons/bookmark-hover.svg);
 transition: 0.3s ease;
 }
+
+.news-card__btn:hover + .news-card__tooltip {
+  display: flex;
+  transition: 0.3s easy;
+}
+
 
 .news-card__link {
   text-decoration: none;
