@@ -2,7 +2,7 @@ import image_01 from '../images/news/image_01.jpg';
 import image_05 from '../images/news/image_05.jpg';
 import image_06 from '../images/news/image_06.jpg';
 
-const allNews = [
+const articles = [
   {
     keyword: 'Природа',
     title: 'Национальное достояние – парки',
@@ -55,4 +55,4 @@ const allNews = [
   },
 ];
 
-export default allNews;
+export default articles;

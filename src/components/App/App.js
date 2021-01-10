@@ -5,16 +5,15 @@ import {
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 
 import './App.css';
-import allNews from '../../utils/allNews';
+import articles from '../../utils/allNews';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  //const { pathname } = useLocation();
-const pathname = '/saved-news';
-// const pathname = '/';
+  const { pathname } = useLocation();
 
   return (
      <>
@@ -25,12 +24,20 @@ const pathname = '/saved-news';
         pathname={pathname}
       />
       <Switch>
-        <Route exact path='/'>
-          <Main
+          <Route exact path='/'> {/* Главная */}
+            <Main
+            loggedIn={loggedIn}
             pathname={pathname}
-            allNews={allNews}
+            articles={articles}
           />
-        </Route>
+          </Route>
+          <Route path="/saved-news"> {/* Сохраненные новости */}
+            <SavedNews
+              loggedIn={loggedIn}
+              pathname={pathname}
+              articles={articles}
+            />
+          </Route>
         </Switch>
       <Footer />
       </div>

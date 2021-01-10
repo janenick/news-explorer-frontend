@@ -16,7 +16,7 @@ function NewsCardList(props) {
   return (
     <section className='news-cards page__news-cards section'>
       <ul className='news-cards__container'>
-        {props.cardList.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
+        {props.articles.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
       </ul>
     </section>
   );

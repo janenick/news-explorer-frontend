@@ -10,7 +10,7 @@ function Header(props) {
 
   return (
     <header className='header page__header section'>
-      <Link to={props.linkPath} className={classNameLogo} title='Перейти на страницу с поиском'
+      <Link navLink={true} title='Перейти на страницу с поиском' className={classNameLogo} to='/' 
         value='NewsExplorer'>NewsExplorer</Link>
       <div className='header__button-group'>
         {props.loggedIn
