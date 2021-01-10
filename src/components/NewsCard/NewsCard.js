@@ -12,6 +12,10 @@ const NewsCard = ({ card, tooltip, iconSave }) => {
     isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
   }
 
+  function makeTitle(str) {
+    return (str.length < 65 ? str : `${str.slice(0, 60)}...`);
+  }
+
   return (
     < li className='news-card'>
       { iconSave
@@ -28,7 +32,7 @@ const NewsCard = ({ card, tooltip, iconSave }) => {
         <img className='news-card__img' src={card.image} alt={card.title} />
         <div className='news-card__info'>
           <p className='news-card__date'>{card.date}</p>
-          <h3 className='news-card__title'>{card.title}</h3>
+          <h3 className='news-card__title'>{makeTitle(card.title)}</h3>
           <p className='news-card__text'>{card.text}</p>
         </div>
         <p className='news-card__source'>{card.source}</p>
