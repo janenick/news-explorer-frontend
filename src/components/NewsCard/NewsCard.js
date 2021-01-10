@@ -41,8 +41,8 @@ const NewsCard = (props) => {
       <div className='news-card__keyword-container'>
         <p className='news-card__keyword'>{card.keyword}</p>
       </div>
-           <p className='news-card__tooltip-text'>Убрать из сохраненных</p>
-       <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
+      <p className='news-card__tooltip-text'>Убрать из сохраненных</p>
+      <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
 
         <img className='news-card__img' src={card.image} alt={card.title} />
         <div className='news-card__info'>
