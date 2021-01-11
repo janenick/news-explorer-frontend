@@ -18,25 +18,30 @@ function App() {
   function handleShowMoreArticles() {
     setRowArticles(rowArticles + 3);
   }
+
+  function handleSearchArticles() {
+    console.log('Ищем статьи');
+  }
   const { pathname } = useLocation();
 
 
   return (
-     <>
-    <div className='page'>
-      <Header
-        loggedIn={loggedIn}
-        pathname={pathname}
-      />
-      <Switch>
+    <>
+      <div className='page'>
+        <Header
+          loggedIn={loggedIn}
+          pathname={pathname}
+        />
+        <Switch>
           <Route exact path='/'> {/* Главная */}
             <Main
-            loggedIn={loggedIn}
-            pathname={pathname}
+              loggedIn={loggedIn}
+              pathname={pathname}
               articles={articles}
               rowArticles={rowArticles}
-              handleShowMoreArticles={handleShowMoreArticles }
-          />
+              handleShowMoreArticles={handleShowMoreArticles}
+              handleSearchArticles={handleSearchArticles}
+            />
           </Route>
           <Route path="/saved-news"> {/* Сохраненные новости */}
             <SavedNews
@@ -46,9 +51,9 @@ function App() {
             />
           </Route>
         </Switch>
-      <Footer />
+        <Footer />
       </div>
-       </>
+    </>
   );
 }
 

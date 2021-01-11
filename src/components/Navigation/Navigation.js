@@ -18,11 +18,13 @@ function Navigation(props) {
             className={classNameTextMain}
             value='Главная' />
         </li>
-        <li className='nav__item'>
+        {props.loggedIn &&
+          <li className='nav__item'>
           <Link navLink={true} title='Перейти на страницу с сохраненными статьями' to='/saved-news'
             className={classNameTextSavedNews}
             value='Сохраненные статьи' />
         </li>
+        }
     </ul>
       </nav>
   );

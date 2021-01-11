@@ -17,7 +17,7 @@ function Header(props) {
 
 
   return (
-    <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header section`}>
+    <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header`}>
       <Link navLink={true} title='Перейти на страницу с поиском' to='/'
         className={classNameLogo}
         value='NewsExplorer' />

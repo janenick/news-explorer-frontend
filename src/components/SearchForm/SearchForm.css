@@ -1,0 +1,28 @@
+.search-form {
+font-family: 'Roboto', Arial, sans-serif;
+font-style: normal;
+font-weight: normal;
+color: #FFFFFF;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-image: url('../../images/navigation-bg.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+height: 576px;
+margin-top: -80px;
+}
+
+.search-form__title {
+font-size: 18px;
+line-height: 24px;
+max-width: 608px;
+margin: 160px auto 32px;
+}
+
+.search-form__subtitle {
+font-size: 18px;
+line-height: 24px;
+max-width: 608px;
+}
