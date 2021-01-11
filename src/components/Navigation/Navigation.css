@@ -1,0 +1,31 @@
+.nav__list {
+display: flex;
+list-style-type: none;
+padding: 0;
+}
+
+.nav__item {
+margin-right: 34px;
+}
+
+.nav__text {
+font-family: 'Roboto', Arial, sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 24px;
+ color: #B6BCBF;
+}
+
+.nav__text_selected {
+  color: #FFFFFF;
+ border-bottom: white 3px solid;
+}
+
+.nav__text_saved-news {
+color: #1A1B22;
+}
+
+.nav__text_selected-saved-news {
+ border-bottom: #1A1B22 3px solid;
+}

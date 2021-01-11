@@ -1,7 +1,38 @@
 .header {
-
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  /* border-bottom: 1px solid rgba(84, 84, 84, 0.7);*/
+  display: flex;
+  align-items: center;
+  min-height: 80px;
   display: flex;
   justify-content: space-between;
   padding: 0 104px;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+}
+
+.header__bg {
+background-image: url('../../images/header-bg.jpg');
+background-size: cover;
+height: 536px;
+}
+
+.header__bg_saved-news {
+background-image: none;
+background-color: #ffffff;
+}
+
+.header__logo {
+  font-family: "Roboto Slab", Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.header__logo_saved-news {
+  color: #1a1b22;
+}
+
+.header__container {
+ display: flex;
 }

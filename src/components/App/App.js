@@ -12,7 +12,7 @@ import './App.css';
 import articles from '../../utils/allNews';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const { pathname } = useLocation();
 
   return (
@@ -20,7 +20,6 @@ function App() {
     <div className='page'>
       <Header
         loggedIn={loggedIn}
-        linkPath={'#'}
         pathname={pathname}
       />
       <Switch>
