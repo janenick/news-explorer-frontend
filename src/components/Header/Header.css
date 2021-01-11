@@ -1,12 +1,17 @@
 .header {
-  /* border-bottom: 1px solid rgba(84, 84, 84, 0.7);*/
+  /* border-bottom: 1px solid rgb(26, 27, 34, 1);*/
   display: flex;
   align-items: center;
   min-height: 80px;
   display: flex;
   justify-content: space-between;
   padding: 0 104px;
-  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+ box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+ background: rgba(196, 196, 196, 0.01);
+}
+
+.header_saved-news {
+box-shadow: inset 0px -1px 0px #D1D2D6;
 }
 
 .header__bg {
@@ -27,12 +32,16 @@ background-color: #ffffff;
   font-size: 20px;
   line-height: 24px;
   color: #ffffff;
+  padding-top: 30px;
+  padding-bottom: 26px;
 }
 
 .header__logo_saved-news {
-  color: #1a1b22;
+   color: #1a1b22;
+
 }
 
 .header__container {
  display: flex;
+ align-items: center;
 }

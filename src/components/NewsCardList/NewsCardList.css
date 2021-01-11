@@ -1,6 +1,6 @@
-.news-cards{
-background: #F5F6F7;
-max-width: 1440px;
+.news-cards {
+  background: #f5f6f7;
+  max-width: 1440px;
 }
 
 .news-cards__container {
@@ -11,5 +11,25 @@ max-width: 1440px;
   grid-column-gap: 16px;
   justify-content: center;
   padding-left: 0;
-  margin: 0 auto;
+  margin: 62px auto 0;
+}
+
+.news-cards__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 80px;
+  padding-left: 104px;
+  font-family: "Roboto Slab", Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+}
+
+.news-cards__btn-position {
+  display: flex;
+  justify-content: center;
+  padding-top: 56px;
+  padding-bottom: 80px;
 }

@@ -13,7 +13,13 @@ import articles from '../../utils/allNews';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
+  const [rowArticles, setRowArticles] = React.useState(3);
+
+  function handleShowMoreArticles() {
+    setRowArticles(rowArticles + 3);
+  }
   const { pathname } = useLocation();
+
 
   return (
      <>
@@ -27,7 +33,9 @@ function App() {
             <Main
             loggedIn={loggedIn}
             pathname={pathname}
-            articles={articles}
+              articles={articles}
+              rowArticles={rowArticles}
+              handleShowMoreArticles={handleShowMoreArticles }
           />
           </Route>
           <Route path="/saved-news"> {/* Сохраненные новости */}

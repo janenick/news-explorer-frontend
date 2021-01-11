@@ -4,8 +4,16 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 48px;
+  padding-left: 19px;
+  padding-right: 19px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
 }
 
 .button_type_search {
@@ -27,11 +35,17 @@
 }
 
 .button_type_logout-main {
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
 }
 
 .button_type_logout-saved-news {
   border: 1px solid #1a1b22;
+}
+
+.button_type_more-results {
+background: #ffffff;
+border-radius: 80px;
+border:none;
 }
 
 .button__img {
@@ -39,7 +53,7 @@
 }
 
 .button__text {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import Link from '../Link/Link';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Button/Button';
 import logoutImgMain from '../../images/icons/logout-main.svg';
@@ -16,9 +17,10 @@ function Header(props) {
 
 
   return (
-    <header className={`header ${main ? 'header__bg' : 'header__bg_saved-news'} page__header section`}>
-      <Link navLink={true} title='Перейти на страницу с поиском' className={classNameLogo} to='/'
-        value='NewsExplorer'>NewsExplorer</Link>
+    <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header section`}>
+      <Link navLink={true} title='Перейти на страницу с поиском' to='/'
+        className={classNameLogo}
+        value='NewsExplorer' />
 
       <div className='header__container'>
         <Navigation loggedIn={props.loggedIn} main={main}/>
