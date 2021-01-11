@@ -19,6 +19,8 @@
 .button_type_search-form {
   background: #2f71e5;
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+   height: 64px;
+   width: 168px;
 }
 
 .button_type_popup {

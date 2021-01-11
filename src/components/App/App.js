@@ -19,8 +19,8 @@ function App() {
     setRowArticles(rowArticles + 3);
   }
 
-  function handleSearchArticles() {
-    console.log('Ищем статьи');
+  function handleSearchArticles(keyword) {
+    console.log('Ищем статьи по ключу: ', keyword);
   }
   const { pathname } = useLocation();
 
