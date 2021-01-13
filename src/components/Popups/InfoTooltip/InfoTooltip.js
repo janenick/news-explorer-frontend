@@ -1,17 +1,25 @@
 import React from 'react';
 
+import Overlay from '../Overlay/Overlay';
+import Modal from '../Modal/Modal';
+import { CloseButton } from '../../Buttons/index';
+
+import './InfoTooltip.css';
+
 function InfoTooltip({
-  name, isOpen, onClose, message,
+  isOpen, onClose, canAuth, message,
 }) {
 
-   return (
-    <div className={`popup popup_name_${name} ${isOpen && 'popup_opened'}`}>
-      <div className='popup__container popup__container_type_popup'>
-        <button type='button' className='popup__btn-close' onClick={onClose}></button>
+  return (
 
-         <p className='popup__text-info-tooltip'>{message}</p>
-      </div>
-    </div>
+    <Overlay isOpen={isOpen}>
+      <Modal isOpen={isOpen}>
+        <CloseButton title="Закрыть" onClick={onClose} />
+
+        <p className='info-tooltip__text'>{message}</p>
+        {canAuth && (<p className='info-tooltip__link-text'>Здесь будет ссылка перехода войти/регистрация</p>)}
+      </Modal>
+    </Overlay>
   );
 
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Link from '../Link/Link';
 import Navigation from '../Navigation/Navigation';
-import Button from '../Button/Button';
+import Button from '../Buttons/Button/Button';
 import logoutImgMain from '../../images/icons/logout-main.svg';
 import logoutImgSavedNews from '../../images/icons/logout-saved-news.svg';
 
@@ -25,24 +25,25 @@ function Header(props) {
       <div className='header__container'>
         <Navigation loggedIn={props.loggedIn} main={main}/>
 
-      {props.loggedIn ? (
-        <Button
-        classNameBtn={logout}
-        image={true}
-        title='Грета'
-        src={logoutImg}
-        alt='Выход'
-        />
-      ) : (
+        {props.loggedIn ? (
           <Button
-            classNameBtn='auth'
-            image={false}
-            title='Авторизоваться'
+            classNameBtn={logout}
+            image={true}
+            title='Грета'
+            src={logoutImg}
+            alt='Выход'
           />
-      )
+        ) : (
+            <Button
+              classNameBtn='auth'
+              image={false}
+              title='Авторизоваться'
+              onClick={props.handleLogin}
+            />
+          )
         }
       </div>
-      </header>
+    </header>
   );
 }
 
