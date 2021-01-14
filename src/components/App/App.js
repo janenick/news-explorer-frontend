@@ -8,6 +8,7 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import LoginPopup from '../Popups/LoginPopup/LoginPopup';
+import RegisterPopup from '../Popups/RegisterPopup/RegisterPopup';
 import InfoTooltip from '../Popups/InfoTooltip/InfoTooltip';
 
 import './App.css';
@@ -15,6 +16,7 @@ import articles from '../../utils/allNews';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [tooltipMessage, setTooltipMessage] = React.useState('');
   const [tooltipCanAuth, setTooltipCanAuth] = React.useState(false);
@@ -33,25 +35,36 @@ function App() {
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
+    setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
   }
 
-  function onOpenPopupInfoTooltip(message, canAuth=false) {
+  function handleInfoTooltipOpen(message, canAuth = false) {
+    setIsRegisterPopupOpen(false);
+    setIsLoginPopupOpen(false);
     setTooltipMessage(message);
-    setIsInfoTooltipPopupOpen(true);
     setTooltipCanAuth(canAuth);
+    setIsInfoTooltipPopupOpen(true);
   }
 
-  function onOpenPopupLogin() {
+  function handleLoginPopupOpen() {
+    setIsRegisterPopupOpen(false);
     setIsLoginPopupOpen(true);
   }
+
+  function handleRegisterPopupOpen() {
+    setIsLoginPopupOpen(false);
+    setIsRegisterPopupOpen(true);
+  }
   const onRegister = () => {
-    onOpenPopupInfoTooltip('Пользователь успешно зарегистрирован!', true);
+    handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
   }
 
-  const handleLogin = () => {
+  const handleLogin = (data) => {
+    console.log('handleLogin.data', data);
     setLoggedIn(true);
-    onOpenPopupInfoTooltip('Пользователь выполнил вход!');
+    setIsLoginPopupOpen(false);
+    handleInfoTooltipOpen('Пользователь выполнил вход!');
   }
 
   return (
@@ -60,7 +73,7 @@ function App() {
         <Header
           loggedIn={loggedIn}
           pathname={pathname}
-          handleLogin={onOpenPopupLogin}
+          handleLogin={handleLoginPopupOpen}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}
@@ -83,20 +96,29 @@ function App() {
         </Switch>
         <Footer />
 
-        {isLoginPopupOpen && <LoginPopup
+        <LoginPopup
           name='login'
           handleLogin={handleLogin}
           isOpen={isLoginPopupOpen}
           onClose={closeAllPopups}
-          handleLinkClick={onRegister}
+          onChangeForm={handleRegisterPopupOpen}
             />
-        }
+
+        <RegisterPopup
+          name='register'
+          handleLogin={handleLogin}
+          isOpen={isRegisterPopupOpen}
+          onClose={closeAllPopups}
+          onChangeForm={handleLoginPopupOpen}
+        />
+
         {isInfoTooltipPopupOpen && <InfoTooltip
           name='infoToolLip'
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
           message={tooltipMessage}
           canAuth={tooltipCanAuth}
+          onChangeForm={handleLoginPopupOpen}
           />
           }
       </div>

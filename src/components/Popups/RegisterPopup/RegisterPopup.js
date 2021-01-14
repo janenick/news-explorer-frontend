@@ -3,8 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import PopupLabel from '../PopupLabel/PopupLabel';
 import validate from '../../../utils/validate';
 
-
-function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
+function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm }) {
 
   const [errors, setErrors] = useState({
     email: '',
@@ -41,21 +40,20 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleLogin(values);
+    handleRegister(values);
   };
 
   return (
 
     <PopupWithForm
-      login={true}
-      name='login'
-      title="Вход"
+      name='register'
+      title="Регистрация"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleFormSubmit}
       onChangeForm={onChangeForm}
       anyInputInvalid={true}
-      formButtonText="Войти"
+      formButtonText="Зарегистрироваться"
     >
       <PopupLabel
         label='E-mail'
@@ -84,7 +82,7 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
     </PopupWithForm>
 
   );
+
 }
 
-export default LoginPopup;
-
+export default RegisterPopup;

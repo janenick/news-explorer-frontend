@@ -17,7 +17,7 @@ function InfoTooltip({
         <CloseButton title="Закрыть" onClick={onClose} />
 
         <p className='info-tooltip__text'>{message}</p>
-        {canAuth && (<p className='info-tooltip__link-text'>Здесь будет ссылка перехода войти/регистрация</p>)}
+        {canAuth && <p className='info-tooltip__link-text' onClick={onChangeForm}>Войти</p>}
       </Modal>
     </Overlay>
   );

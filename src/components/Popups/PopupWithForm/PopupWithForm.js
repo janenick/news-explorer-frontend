@@ -4,36 +4,29 @@ import PopupForm from '../PopupForm/PopupForm';
 import Modal from '../Modal/Modal';
 import { CloseButton, Button } from '../../Buttons/index';
 
-function PopupWithForm(name, title,
-  children,
-  isOpen,
-  onClose,
-  onSubmit,
-  anyInputInvalid,
-  authStatus,
-  handleLinkClick,
-  formButtonText,) {
+import './PopupWithForm.css';
+
+function PopupWithForm(props) {
 
   return (
-    <Overlay isOpen={isOpen}>
-      <Modal isOpen={isOpen}>
-        <CloseButton title="Закрыть" onClick={onClose} />
+    <Overlay isOpen={props.isOpen}>
+      <Modal isOpen={props.isOpen}>
+        <CloseButton title="Закрыть" onClick={props.onClose} />
         <PopupForm
-          name={name}
-          title={title}
-          onSubmit={onSubmit}
+          name={props.name}
+          title={props.title}
+          onSubmit={props.onSubmit}
         >
-          {children}
-          <div>
-            <Button
-              disabled={anyInputInvalid}
-              type='submit'
-              classNameBtn='popup'
-              title={formButtonText} />
-            {authStatus && (<p>Здесь будет ссылка перехода войти/регистрация</p>)}
-          </div>
-        </PopupForm>
+          {props.children}
 
+            <Button
+            disabled={props.anyInputInvalid}
+            type='submit'
+            classNameBtn={props.anyInputInvalid ? 'disabled' : 'popup'}
+            title={props.formButtonText} />
+
+          <p className='popup__action-text'>или <span className='popup__link popup__action-text popup__action-span' onClick={props.onChangeForm}>{props.login ? 'Зарегистрироваться' : 'Войти'}</span></p>
+        </PopupForm>
       </Modal>
     </Overlay>
 
