@@ -7,7 +7,7 @@ import { CloseButton } from '../../Buttons/index';
 import './InfoTooltip.css';
 
 function InfoTooltip({
-  isOpen, onClose, canAuth, message,
+  isOpen, onClose, canAuth, message, onChangeForm
 }) {
 
   return (
@@ -17,7 +17,7 @@ function InfoTooltip({
         <CloseButton title="Закрыть" onClick={onClose} />
 
         <p className='info-tooltip__text'>{message}</p>
-        {canAuth && <p className='info-tooltip__link-text' onClick={onChangeForm}>Войти</p>}
+        {canAuth && <p className='info-tooltip__link' onClick={onChangeForm}>Войти</p>}
       </Modal>
     </Overlay>
   );

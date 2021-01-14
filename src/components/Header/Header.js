@@ -32,6 +32,7 @@ function Header(props) {
             title='Грета'
             src={logoutImg}
             alt='Выход'
+            onClick={props.handleSignOut}
           />
         ) : (
             <Button

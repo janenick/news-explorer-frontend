@@ -1,43 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import PopupLabel from '../PopupLabel/PopupLabel';
-import validate from '../../../utils/validate';
-
+import validateForm from '../../../utils/validateForm';
 
 function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
 
-  const [errors, setErrors] = useState({
-    email: '',
-    password: '',
-  });
+  const {
+    values, handleInputChange, errors, isValid, resetForm,
+  } = validateForm();
 
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [anyInputInvalid, setAnyInputInvalid] = useState(true);
-  const [showError, setShowError] = useState({});
-
-  const checkFormValidity = () => {
-    const any = Object
-      .values(errors)
-      .some((i) => i !== false);
-    setAnyInputInvalid(any);
-  };
-
-  useEffect(() => {
-    setErrors(validate(values, errors));
-  }, [values]);
-
-  useEffect(() => {
-    checkFormValidity();
-  }, [errors]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
+  React.useEffect(() => {
+    resetForm();
+  }, [isOpen, resetForm]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -54,14 +28,14 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
       onClose={onClose}
       onSubmit={handleFormSubmit}
       onChangeForm={onChangeForm}
-      anyInputInvalid={true}
+      isDisabled={!isValid}
       formButtonText="Войти"
     >
       <PopupLabel
         label='E-mail'
         id='email' required
-        error={!!errors.email}
-        value={values.email}
+        error={errors.email}
+        value={values.email || ''}
         name="email"
         type="email"
         placeholder="Введите почту"
@@ -72,13 +46,15 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
       <PopupLabel
         label='Пароль'
         id='email' required
-        error={!!errors.password}
-        value={values.password}
+        error={errors.password}
+        value={values.password || ''}
         name="password"
         type="password"
         placeholder="Введите пароль"
         onChange={handleInputChange}
         noValidate
+        minLength='8'
+        maxLength='30'
       >
       </PopupLabel>
     </PopupWithForm>

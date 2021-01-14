@@ -9,8 +9,11 @@ function PopupLabel(props) {
         type={props.type}
         placeholder={props.placeholder}
         onChange={props.onChange}
-        className='popup__input'/>
-      <span className='popup__input-error'></span>
+        className='popup__input'
+        required={props.required}
+        minLength={props.minLength}
+        maxLenth={props.maxLength}/>
+      <span className={!props.isValid ? 'popup__input-error' : ''}> {props.error || ''}</span>
     </label>
   );
 }

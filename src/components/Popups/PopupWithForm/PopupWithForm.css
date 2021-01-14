@@ -7,11 +7,9 @@ line-height: 17px;
 color: #000000;
 }
 
-.popup__action-span {
-  color: #2F71E5;
-}
 
 .popup__link {
   text-decoration: none;
   cursor: pointer;
+   color: #2F71E5;
 }

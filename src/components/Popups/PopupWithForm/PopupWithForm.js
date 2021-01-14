@@ -22,10 +22,10 @@ function PopupWithForm(props) {
             <Button
             disabled={props.anyInputInvalid}
             type='submit'
-            classNameBtn={props.anyInputInvalid ? 'disabled' : 'popup'}
+            classNameBtn={props.isDisabled ? 'disabled' : 'popup'}
             title={props.formButtonText} />
 
-          <p className='popup__action-text'>или <span className='popup__link popup__action-text popup__action-span' onClick={props.onChangeForm}>{props.login ? 'Зарегистрироваться' : 'Войти'}</span></p>
+          <p className='popup__action-text'>или <span className='popup__link popup__action-text' onClick={props.onChangeForm}>{props.login ? 'Зарегистрироваться' : 'Войти'}</span></p>
         </PopupForm>
       </Modal>
     </Overlay>

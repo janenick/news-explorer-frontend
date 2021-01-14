@@ -49,6 +49,7 @@ function App() {
 
   function handleLoginPopupOpen() {
     setIsRegisterPopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
     setIsLoginPopupOpen(true);
   }
 
@@ -56,7 +57,8 @@ function App() {
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(true);
   }
-  const onRegister = () => {
+  const handleRegister = () => {
+    setIsRegisterPopupOpen(false);
     handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
   }
 
@@ -67,6 +69,14 @@ function App() {
     handleInfoTooltipOpen('Пользователь выполнил вход!');
   }
 
+  const handleSignOut = () => {
+    // выход из профиля
+    /* localStorage.removeItem('token');
+    setEmail('');
+    */
+    setLoggedIn(false);
+   };
+
   return (
     <>
       <div className='page'>
@@ -74,6 +84,7 @@ function App() {
           loggedIn={loggedIn}
           pathname={pathname}
           handleLogin={handleLoginPopupOpen}
+          handleSignOut={handleSignOut}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}
@@ -106,13 +117,13 @@ function App() {
 
         <RegisterPopup
           name='register'
-          handleLogin={handleLogin}
+          handleRegister={handleRegister}
           isOpen={isRegisterPopupOpen}
           onClose={closeAllPopups}
           onChangeForm={handleLoginPopupOpen}
         />
 
-        {isInfoTooltipPopupOpen && <InfoTooltip
+         <InfoTooltip
           name='infoToolLip'
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
@@ -120,7 +131,7 @@ function App() {
           canAuth={tooltipCanAuth}
           onChangeForm={handleLoginPopupOpen}
           />
-          }
+
       </div>
     </>
   );
