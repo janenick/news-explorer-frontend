@@ -19,6 +19,7 @@ function PopupWithForm(props) {
         >
           {props.children}
 
+          {props.register && <span className='popup__error'>Такой пользователь уже есть</span>}
             <Button
             disabled={props.anyInputInvalid}
             type='submit'
@@ -35,3 +36,5 @@ function PopupWithForm(props) {
 }
 
 export default PopupWithForm;
+
+// {props.register && <span className={`'popup__error' ${props.register ? 'popup__error_opened' : ''}`}>Такой пользователь уже есть</span>}

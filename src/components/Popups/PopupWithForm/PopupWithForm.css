@@ -13,3 +13,23 @@ color: #000000;
   cursor: pointer;
    color: #2F71E5;
 }
+
+.popup__error {
+font-family: 'Inter', Arial, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 15px;
+color: #FF0000;
+width: 100%;
+text-align: center;
+display: block;
+position: absolute;
+margin-top: calc(100% - 153px);
+}
+
+.popup__error_opened {
+display: block;
+position: absolute;
+margin-top: calc(100% - 153px);
+}
