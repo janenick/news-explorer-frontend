@@ -32,3 +32,17 @@ color: #1A1B22;
 .nav__text_selected-saved-news {
  border-bottom: #1A1B22 3px solid;
 }
+
+
+@media screen and (max-width: 800px) {
+  .nav__text {
+font-size: 16px;
+ padding-bottom: 28px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .nav__item {
+margin-right: 16px;
+  }
+}

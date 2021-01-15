@@ -17,8 +17,8 @@
 }
 
 .about__description-container {
-margin-left: 56px;
-max-width: 600px;
+  margin-left: 56px;
+  max-width: 600px;
 }
 
 .about__title {
@@ -39,4 +39,32 @@ max-width: 600px;
   font-size: 18px;
   line-height: 24px;
   margin-top: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .about {
+    padding: 61px 40px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .about__avatar {
+    width: 232px;
+    height: 232px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .about__description-container {
+    margin-left: 32px;
+    max-width: 424px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .about__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
 }

@@ -1,5 +1,5 @@
 .page {
-background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #1a1b22;
   display: flex;
   flex-direction: column;
@@ -17,16 +17,14 @@ background-color: #FFFFFF;
   margin: 0 auto;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .section {
-    padding-right: 40px;
-    padding-left: 40px;
+    max-width: 768px;
   }
 }
 
-@media screen and (max-width: 320) {
+@media screen and (max-width: 375) {
   .section {
-    padding-right: 16px;
-    padding-left: 16px;
+    max-width: 320px;
   }
 }

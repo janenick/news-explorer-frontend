@@ -67,3 +67,34 @@
 .search-form__input::placeholder {
   color: #b6bcbf;
 }
+
+@media screen and (max-width: 800px) {
+  .search-form {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search-form__container {
+    margin-top: 104px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search-form__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search-form__subtitle {
+    margin-top: 16px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search-form__input-container {
+    margin-top: 48px;
+  }
+}

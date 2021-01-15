@@ -21,7 +21,7 @@
   display: flex;
   font-size: 18px;
   line-height: 24px;
-  color: #1A1B22;
+  color: #1a1b22;
 }
 
 .footer__list {
@@ -48,4 +48,23 @@
   display: flex;
   color: #1a1b22;
   font-size: 18px;
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    min-height: 64px;
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 375px) {
+.footer__item {
+  margin-right: 17px;
+}
 }

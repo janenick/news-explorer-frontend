@@ -115,3 +115,10 @@
 .button__text_type_logout-saved-news {
   color: #1a1b22;
 }
+
+
+@media screen and (max-width: 800px) {
+.button__text {
+  font-size: 16px;
+  }
+  }
