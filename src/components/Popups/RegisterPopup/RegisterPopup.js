@@ -24,22 +24,22 @@ function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm }) {
     <PopupWithForm
       register={true}
       name='register'
-      title="Регистрация"
+      title='Регистрация'
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleFormSubmit}
       onChangeForm={onChangeForm}
       isDisabled={!isValid}
-      formButtonText="Зарегистрироваться"
+      formButtonText='Зарегистрироваться'
     >
       <PopupLabel
         label='E-mail'
         id='email' required
         error={errors.email}
         value={values.email}
-        name="email"
-        type="email"
-        placeholder="Введите почту"
+        name='email'
+        type='email'
+        placeholder='Введите почту'
         onChange={handleInputChange}
         noValidate
       >
@@ -49,12 +49,26 @@ function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm }) {
         id='email' required
         error={errors.password}
         value={values.password || ''}
-        name="password"
-        type="password"
-        placeholder="Введите пароль"
+        name='password'
+        type='password'
+        placeholder='Введите пароль'
         onChange={handleInputChange}
         noValidate
         minLength='8'
+        maxLength='30'
+      >
+      </PopupLabel>
+      <PopupLabel
+        label='Имя'
+        id='name' required
+        error={errors.name}
+        value={values.name || ''}
+        name='name'
+        type='text'
+        placeholder='Введите своё имя'
+        onChange={handleInputChange}
+        noValidate
+        minLength='2'
         maxLength='30'
       >
       </PopupLabel>

@@ -10,6 +10,7 @@ import Footer from '../Footer/Footer';
 import LoginPopup from '../Popups/LoginPopup/LoginPopup';
 import RegisterPopup from '../Popups/RegisterPopup/RegisterPopup';
 import InfoTooltip from '../Popups/InfoTooltip/InfoTooltip';
+import Preloader from '../Preloader/Preloader';
 
 import './App.css';
 import articles from '../../utils/allNews';
@@ -20,6 +21,7 @@ function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [tooltipMessage, setTooltipMessage] = React.useState('');
   const [tooltipCanAuth, setTooltipCanAuth] = React.useState(false);
+  const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [rowArticles, setRowArticles] = React.useState(3);
   const { pathname } = useLocation();
@@ -30,8 +32,10 @@ function App() {
   }
 
   function handleSearchArticles(keyword) {
+    setIsPreloaderOpen(true);
     console.log('Ищем статьи по ключу: ', keyword);
-  }
+    setTimeout(() => setIsPreloaderOpen(false), 1000);
+     }
 
 
   function closeAllPopups() {
@@ -132,6 +136,10 @@ function App() {
           message={tooltipMessage}
           canAuth={tooltipCanAuth}
           onChangeForm={handleLoginPopupOpen}
+        />
+
+        <Preloader
+          isOpen={isPreloaderOpen}
         />
 
       </div>
