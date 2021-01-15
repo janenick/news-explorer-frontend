@@ -5,7 +5,7 @@
   top: -40px;
   right: -40px;
   user-select: none;
-  background: transparent;
+  background: url(../../../images/icons/close.svg) center no-repeat;
   border: 0;
   cursor: pointer;
 }

@@ -23,11 +23,12 @@ function Header(props) {
         value='NewsExplorer' />
 
       <div className='header__container'>
-        <Navigation loggedIn={props.loggedIn} main={main}/>
+        <Navigation loggedIn={props.loggedIn} main={main} />
 
         {props.loggedIn ? (
           <Button
             classNameBtn={logout}
+            className={`button_type_${logout}`}
             image={true}
             title='Грета'
             src={logoutImg}
@@ -37,6 +38,7 @@ function Header(props) {
         ) : (
             <Button
               classNameBtn='auth'
+              className='button_type_auth'
               image={false}
               title='Авторизоваться'
               onClick={props.handleLogin}

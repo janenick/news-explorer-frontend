@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Route, Switch, useLocation,
+  Route, Switch, useLocation, useHistory
 } from 'react-router-dom';
 
 import Header from '../Header/Header';
@@ -23,6 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [rowArticles, setRowArticles] = React.useState(3);
   const { pathname } = useLocation();
+  const history = useHistory();
 
   function handleShowMoreArticles() {
     setRowArticles(rowArticles + 3);
@@ -75,7 +76,8 @@ function App() {
     setEmail('');
     */
     setLoggedIn(false);
-   };
+    history.push('/');
+  };
 
   return (
     <>
@@ -97,7 +99,7 @@ function App() {
               handleSearchArticles={handleSearchArticles}
             />
           </Route>
-          <Route path="/saved-news"> {/* Сохраненные новости */}
+          <Route path='/saved-news'> {/* Сохраненные новости */}
             <SavedNews
               loggedIn={loggedIn}
               pathname={pathname}
@@ -113,7 +115,7 @@ function App() {
           isOpen={isLoginPopupOpen}
           onClose={closeAllPopups}
           onChangeForm={handleRegisterPopupOpen}
-            />
+        />
 
         <RegisterPopup
           name='register'
@@ -123,14 +125,14 @@ function App() {
           onChangeForm={handleLoginPopupOpen}
         />
 
-         <InfoTooltip
+        <InfoTooltip
           name='infoToolLip'
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
           message={tooltipMessage}
           canAuth={tooltipCanAuth}
           onChangeForm={handleLoginPopupOpen}
-          />
+        />
 
       </div>
     </>

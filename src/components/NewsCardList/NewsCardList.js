@@ -28,6 +28,7 @@ function NewsCardList(props) {
         <div className='news-cards__btn-position'>
           {(props.articles.length - props.rowArticles > 0) && <Button
             classNameBtn='more-results'
+            className='button_type_more-results'
             image={false}
             title='Показать еще'
             onClick={props.handleShowMoreArticles}

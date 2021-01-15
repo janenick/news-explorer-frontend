@@ -24,6 +24,7 @@ function PopupWithForm(props) {
             disabled={props.anyInputInvalid}
             type='submit'
             classNameBtn={props.isDisabled ? 'disabled' : 'popup'}
+            className={props.isDisabled ? 'button_type_disabled' : 'button_type_popup button_type_link'}
             title={props.formButtonText} />
 
           <p className='popup__action-text'>или <span className='popup__link popup__action-text' onClick={props.onChangeForm}>{props.login ? 'Зарегистрироваться' : 'Войти'}</span></p>

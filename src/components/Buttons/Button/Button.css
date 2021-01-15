@@ -16,11 +16,33 @@
   outline: none;
 }
 
+.button:hover {
+  opacity: 0.9;
+  transition: background 0.6s ease;
+}
+
+.button_type:disabled {
+  background: #e6e8eb;
+  border: none;
+}
+
 .button_type_search-form {
-  background: #2f71e5;
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
-   height: 64px;
-   width: 168px;
+  height: 64px;
+  width: 168px;
+  border: none;
+}
+
+.button_type_link {
+  background: #2f71e5;
+  transition: background 0.6s ease;
+}
+.button_type_link:hover {
+  background: #347eff;
+}
+
+.button_type_link:active {
+  background: #2a65cc;
 }
 
 .button_type_popup {
@@ -29,11 +51,13 @@
   margin-top: 8px;
   margin-bottom: 16px;
   width: 100%;
+  border: none;
 }
 
 .button_type_disabled {
   width: 100%;
   background: #e6e8eb;
+  border: none;
 }
 
 .button_type_auth {
@@ -49,9 +73,9 @@
 }
 
 .button_type_more-results {
-background: #ffffff;
-border-radius: 80px;
-border:none;
+  background: #ffffff;
+  border-radius: 80px;
+  border: none;
 }
 
 .button__img {
