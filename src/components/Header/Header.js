@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Link from '../Link/Link';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Buttons/Button/Button';
+import ButtonMobileMenu from '../Buttons/ButtonMobileMenu/ButtonMobileMenu';
 import logoutImgMain from '../../images/icons/logout-main.svg';
 import logoutImgSavedNews from '../../images/icons/logout-saved-news.svg';
 
@@ -10,11 +11,20 @@ import './Header.css';
 
 function Header(props) {
   // const main = (props.pathname === '/' || isMenuMobile);
+
+  const [mobileMenuOpened, setmobileMenuOpened] = React.useState(false);
+
+
   const main = (props.pathname === '/') ? true : false;
   const classNameLogo = `header__logo ${main ? '' : 'header__logo_saved-news'}`;
   const logout = main ? 'logout-main' : 'logout-saves-news';
   const logoutImg = main ? logoutImgMain : logoutImgSavedNews
 
+  function toggleMenu() {
+    console.log(`Меню было ${mobileMenuOpened}`);
+    setmobileMenuOpened(!mobileMenuOpened);
+
+  }
 
   return (
     <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header`}>
@@ -46,6 +56,11 @@ function Header(props) {
           )
         }
       </div>
+      <ButtonMobileMenu
+        main={main}
+        isOpen={mobileMenuOpened}
+        onClick={toggleMenu}
+      />
     </header>
   );
 }
