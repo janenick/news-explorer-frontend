@@ -83,7 +83,7 @@
 }
 
 .button__text {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -116,9 +116,17 @@
   color: #1a1b22;
 }
 
-
 @media screen and (max-width: 800px) {
-.button__text {
-  font-size: 16px;
+  .button {
+    height: 56px;
   }
+  .button__text {
+    font-size: 16px;
   }
+}
+
+@media screen and (max-width: 432px) {
+  .button {
+    width: 100%;
+  }
+}
