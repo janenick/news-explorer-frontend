@@ -7,7 +7,7 @@ const About = () => {
   // const currentUser = React.useContext(CurrentUserContext);
 
   return (
-    <section className='about section'>
+    <section className='about'>
       <div className='about__container'>
         <img className='about__avatar' src={avatar_img} alt='аватар автора' />
         <div className='about__description-container'>

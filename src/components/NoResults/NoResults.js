@@ -4,7 +4,7 @@ import './NoResults.css';
 
 function NoResults() {
     return (
-      <section className='no-results section'>
+      <section className='no-results'>
         <div className='no-results__container'>
         <div className='no-results__img'></div>
         <h3 className='no-results__title'>Ничего не найдено</h3>

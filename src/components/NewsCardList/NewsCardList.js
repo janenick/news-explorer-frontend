@@ -18,7 +18,7 @@ function NewsCardList(props) {
 
 
   return (
-    <section className='news-cards page__news-cards section'>
+    <section className='news-cards page__news-cards'>
       {main ? <>
         <p className='news-cards__title'>Результаты поиска</p>
         <ul className='news-cards__container'>

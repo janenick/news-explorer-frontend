@@ -24,7 +24,7 @@ function Main(props) {
     }
 
     return (
-      <main className='main section'>
+      <main className='main'>
         <SearchForm handleSearchArticles={props.handleSearchArticles} />
         {showArticles()}
         <About />

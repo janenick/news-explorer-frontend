@@ -12,7 +12,6 @@ import RegisterPopup from '../Popups/RegisterPopup/RegisterPopup';
 import InfoTooltip from '../Popups/InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 
-import './App.css';
 import articles from '../../utils/allNews';
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
     setIsPreloaderOpen(true);
     console.log('Ищем статьи по ключу: ', keyword);
     setTimeout(() => setIsPreloaderOpen(false), 1000);
-     }
+  }
 
 
   function closeAllPopups() {
@@ -85,7 +84,6 @@ function App() {
 
   return (
     <>
-      <div className='page'>
         <Header
           loggedIn={loggedIn}
           pathname={pathname}
@@ -95,7 +93,7 @@ function App() {
         <Switch>
           <Route exact path='/'> {/* Главная */}
             <Main
-              loggedIn={loggedIn}
+             loggedIn={loggedIn}
               pathname={pathname}
               articles={articles}
               rowArticles={rowArticles}
@@ -104,7 +102,7 @@ function App() {
             />
           </Route>
           <Route path='/saved-news'> {/* Сохраненные новости */}
-            <SavedNews
+         <SavedNews
               loggedIn={loggedIn}
               pathname={pathname}
               articles={articles}
@@ -141,8 +139,6 @@ function App() {
         <Preloader
           isOpen={isPreloaderOpen}
         />
-
-      </div>
     </>
   );
 }

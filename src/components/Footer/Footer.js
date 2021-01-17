@@ -7,7 +7,7 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <footer className='footer section page__footer'>
+    <footer className='footer page__footer'>
       <p className='footer__copyright'>&copy; 2020 Supersite, Powered by News API</p>
       <div className='footer__menu'>
         <ul className='footer__list'>

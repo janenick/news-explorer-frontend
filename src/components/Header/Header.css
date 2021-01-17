@@ -1,11 +1,8 @@
 .header {
-  /* border-bottom: 1px solid rgb(26, 27, 34, 1);*/
   display: flex;
   align-items: center;
   min-height: 80px;
-  display: flex;
   justify-content: space-between;
-  padding: 0 104px;
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   background: rgba(196, 196, 196, 0.01);
   z-index: 1;
@@ -38,6 +35,5 @@
 @media screen and (max-width: 800px) {
   .header {
     min-height: 66px;
-    padding: 0 40px;
   }
 }
