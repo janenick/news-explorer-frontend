@@ -10,7 +10,7 @@ function Footer() {
     <footer className='footer page__footer'>
       <p className='footer__copyright'>&copy; 2020 Supersite, Powered by News API</p>
       <div className='footer__menu'>
-        <ul className='footer__list'>
+        <ul className='footer__list footer__list_'>
           <li className='footer__item'>
            <Link navLink={true} title='Перейти на Главную' className='footer__link' to='/' value='Главная' />
           </li>
@@ -22,7 +22,7 @@ function Footer() {
           </li>
         </ul>
 
-        <ul className='footer__list'>
+        <ul className='footer__list  footer__list_social-icon'>
           <li className='footer__item'>
             <Link linkImage={true}
               title='Открыть сайт Github в новом окне'
