@@ -1,6 +1,7 @@
 .news-cards {
   background: #f5f6f7;
   max-width: 1440px;
+  margin: auto;
 }
 
 .news-cards__container {
@@ -38,8 +39,9 @@
 @media screen and (max-width: 800px) {
   .news-cards {
     max-width: 768px;
-    padding-left: 40px;
+    /* padding-left: 40px;
     padding-right: 40px;
+    */
   }
 
   .news-cards__container {
@@ -66,8 +68,9 @@
 @media screen and (max-width: 432px) {
   .news-cards {
     max-width: 320px;
-    padding-left: 16px;
+    /*  padding-left: 16px;
     padding-right: 16px;
+    */
   }
 
   .news-cards__container {

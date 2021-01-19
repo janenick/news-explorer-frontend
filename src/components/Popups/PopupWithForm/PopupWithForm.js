@@ -9,7 +9,7 @@ import './PopupWithForm.css';
 function PopupWithForm(props) {
 
   return (
-    <Overlay isOpen={props.isOpen}>
+    <Overlay isOpen={props.isOpen} onClick={props.onClose }>
       <Modal isOpen={props.isOpen}>
         <CloseButton title="Закрыть" onClick={props.onClose} />
         <PopupForm
@@ -37,5 +37,3 @@ function PopupWithForm(props) {
 }
 
 export default PopupWithForm;
-
-// {props.register && <span className={`'popup__error' ${props.register ? 'popup__error_opened' : ''}`}>Такой пользователь уже есть</span>}

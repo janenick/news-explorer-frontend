@@ -4,6 +4,8 @@ import Link from '../Link/Link';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Buttons/Button/Button';
 import ButtonMobileMenu from '../Buttons/ButtonMobileMenu/ButtonMobileMenu';
+import MobileMenu from '../MobileMenu/MobileMenu';
+import Overlay from '../Popups/Overlay/Overlay';
 import logoutImgMain from '../../images/icons/logout-main.svg';
 import logoutImgSavedNews from '../../images/icons/logout-saved-news.svg';
 
@@ -26,14 +28,19 @@ function Header(props) {
 
   }
 
+  function handleOverlayClose() {
+
+  }
+
   return (
     <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header`}>
+      <div className={`header__container ${mobileMenuOpened ? 'header__container_mobile' : ''}`}>
       <Link navLink={true} title='Перейти на страницу с поиском' to='/'
         className={classNameLogo}
         value='NewsExplorer' />
 
-      <div className='header__container'>
-        <Navigation loggedIn={props.loggedIn} main={main} />
+      <div className='header__menu'>
+        <Navigation loggedIn={props.loggedIn} main={main}/>
 
         {props.loggedIn ? (
           <Button
@@ -61,6 +68,19 @@ function Header(props) {
         isOpen={mobileMenuOpened}
         onClick={toggleMenu}
       />
+         </div>
+      {mobileMenuOpened && (
+
+        <MobileMenu
+        isOpen={mobileMenuOpened}
+        loggedIn={props.loggedIn}
+        main={main}
+        handleLogin={props.handleLogin}
+        handleSignOut={props.handleSignOut}
+          />
+
+          )
+      }
     </header>
   );
 }

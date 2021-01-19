@@ -82,6 +82,20 @@ function App() {
     history.push('/');
   };
 
+  function handleEsc(evt) {
+    if (evt.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  });
+
   return (
     <>
         <Header

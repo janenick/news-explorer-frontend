@@ -12,7 +12,7 @@ function InfoTooltip({
 
   return (
 
-    <Overlay isOpen={isOpen}>
+    <Overlay isOpen={isOpen} onClick={onClose}>
       <Modal isOpen={isOpen}>
         <CloseButton title="Закрыть" onClick={onClose} />
 

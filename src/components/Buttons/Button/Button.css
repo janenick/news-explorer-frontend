@@ -78,12 +78,21 @@
   border: none;
 }
 
+.button_type_mobile {
+  border: 1px solid #ffffff;
+  width: 100%;
+}
+
+.button_type_auth-mobile {
+  width: 100%;
+}
+
 .button__img {
   margin-left: 10px;
 }
 
 .button__text {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -114,6 +123,11 @@
 
 .button__text_type_logout-saved-news {
   color: #1a1b22;
+}
+
+.button__text_type_mobile {
+  color: #ffffff;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,9 +1,6 @@
 import React from 'react';
 
 import './ButtonMobileMenu.css';
-/* import btnImgMain from '../../images/icons/mobile-menu-main.svg';
-import btnImgSavedNews from '../../images/icons/mobile-menu-saved-news.svg';
-*/
 
 const ButtonMobileMenu = (props) => {
   const classNameBtnContainer = props.main ? 'btn-mobile-menu__container' : 'btn-mobile-menu__container_saved-news';
@@ -15,8 +12,8 @@ const ButtonMobileMenu = (props) => {
       onClick={props.onClick}
       className={classNameBtn}>
 
-    </button>
-    </div>
+      </button>
+     </div>
 
   );
 
