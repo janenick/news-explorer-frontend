@@ -132,14 +132,20 @@
 
 @media screen and (max-width: 800px) {
   .button {
-    height: 56px;
+    height: 40px;
   }
+
+
+.button_type_search-form {
+  height: 64px;
+  width: 160px;
+}
   .button__text {
     font-size: 16px;
   }
 }
 
-@media screen and (max-width: 432px) {
+@media screen and (max-width: 500px) {
   .button {
     width: 100%;
   }
