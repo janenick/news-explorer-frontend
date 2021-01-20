@@ -55,7 +55,7 @@ function Header(props) {
   React.useEffect(() => {
     const handleOverlayClose = (evt) => {
       console.log(evt)
-      if (evt.target.classList.contains('mobile-menu')) {
+      if (evt.target.classList.contains('mobile-menu_opened')) {
         setIsMobileMenuOpened(false);
       }
     }
@@ -98,16 +98,17 @@ function Header(props) {
         <ButtonMobileMenu
           main={main}
           isOpen={isMobileMenuOpened}
+          useMobileMenu={useMobileMenu}
           onClick={toggleMenu}
         />
       </div>
-      <MobileMenu
+      {isMobileMenuOpened && <MobileMenu
         isOpen={isMobileMenuOpened}
         loggedIn={props.loggedIn}
         main={main}
         handleLogin={props.handleLogin}
         handleSignOut={props.handleSignOut}
-      />
+      />}
     </header>
   );
 

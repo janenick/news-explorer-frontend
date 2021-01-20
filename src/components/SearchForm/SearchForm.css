@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("../../images/navigation-bg.jpg");
+  background-image: url('../../images/navigation-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -21,7 +21,7 @@
 
 .search-form__title {
   width: 100%;
-  font-family: "Roboto Slab", Arial, sans-serif;
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 60px;
@@ -32,7 +32,7 @@
 
 .search-form__subtitle {
   width: 100%;
-  font-family: "Roboto Slab", Arial, sans-serif;
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -55,7 +55,7 @@
   width: 100%;
   border-radius: 100px;
   border: none;
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -67,6 +67,13 @@
 
 .search-form__input::placeholder {
   color: #b6bcbf;
+}
+
+@media screen and (max-width: 960px) {
+  .search-form {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -96,48 +103,43 @@
   }
 }
 
-@media screen and (max-width: 960px) {
-  .search-form {
-  margin-left: -40px;
-  margin-right: -40px;
-  }
-}
-
 @media screen and (max-width: 680px) {
+  .search-form {
+    background-image: url('../../images/mobile-bg.jpg');
+  }
+
   .search-form__container {
     padding-left: 40px;
     padding-right: 40px;
-    }
+  }
 }
 
 @media screen and (max-width: 500px) {
   .search-form {
-  margin-left: -16px;
-  margin-right: -16px;
-     height: 536px;
-      margin-top: -56px;
+    margin-left: -16px;
+    margin-right: -16px;
+    height: 536px;
+    margin-top: -56px;
   }
-    .search-form__container {
-   padding-left: 16px;
+  .search-form__container {
+    padding-left: 16px;
     padding-right: 16px;
-     margin-top: 94px;
-
+    margin-top: 94px;
   }
 
-    .search-form__input-container {
+  .search-form__input-container {
     margin-top: 122px;
     flex-direction: column;
     background: transparent;
   }
 
-    .search-form__input {
+  .search-form__input {
     padding-left: 16px;
     margin-bottom: 16px;
   }
 }
 
 @media screen and (max-width: 432px) {
-
   .search-form__container {
     margin-top: 86px;
     padding-bottom: 32px;
@@ -146,14 +148,10 @@
   .search-form__title {
     padding-left: 3px;
   }
-
 }
 
-
 @media screen and (max-width: 360px) {
-
   .search-form__input-container {
     margin-top: 86px;
-     }
-
+  }
 }

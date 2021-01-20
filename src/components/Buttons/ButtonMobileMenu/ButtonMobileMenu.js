@@ -7,16 +7,19 @@ const ButtonMobileMenu = (props) => {
   const classNameBtn = `btn-mobile-menu__button ${props.isOpen ? 'btn-mobile-menu__button_type_close' : props.main ? 'btn-mobile-menu__button_type_main' : 'btn-mobile-menu__button_type_saved-news'}`;
 
   return (
-    <div className={classNameBtnContainer}>
-    <button
-      onClick={props.onClick}
-      className={classNameBtn}>
+    <>
+      {props.useMobileMenu && (
+        <div className={classNameBtnContainer}>
+          <button
+            onClick={props.onClick}
+            className={classNameBtn}>
 
-      </button>
-     </div>
-
+          </button>
+        </div>
+      )
+      }
+    </>
   );
-
 };
 
 export default ButtonMobileMenu;

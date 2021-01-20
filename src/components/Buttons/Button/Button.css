@@ -145,8 +145,9 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 620px) {
   .button {
     width: 100%;
+    height: 56px;
   }
 }
