@@ -1,39 +1,102 @@
 .mobile-menu {
-display: none;
-}
-
-.mobile-menu_opened{
-   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 61px;
-  left: 0;
+  /*display: none;
+  min-height: 320px;
+  position: relative;
+  top: -55px;
+ /margin: -286px -40px 0;
+  background-color: #1a1b22;
+  border-radius: 0 0 16px 16px;
+  transition: all 0.6s, 0.6s ease;
+  -moz-transition: all 0.6s, 0.6s ease;
+  transform: translateY(100%);
+  */
   z-index: 2;
 }
 
+.mobile-menu_opened {
+   background: rgba(0, 0, 0, 0.5);
+     height: 100%;
+position: fixed;
+  top: 55px;
+  left: 0;
+  margin-top: 0;
+  transition: all 0s, 0.6s ease;
+  -moz-transition: all 0s, 0.6s ease;
+}
+
+  .mobile-menu__container {
+        /*display: none;*/
+          display: flex;
+  }
+
+
 @media screen and (max-width: 620px) {
-.mobile-menu {
-  display: block;
+  .mobile-menu {
+
+  }
+
+  .menu-mobile__container {
+
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+    .mobile-menu {
+
+  }
+
+  }
+
+
+/* .mobile-menu {
+  display: none;
   min-height: 320px;
-  background-color: #1A1B22;
-  margin-top: -72px;
   position: relative;
-  width: 100%;
-  /*padding: 0 40px;*/
-      transition: .6s all;
-    transform: translateY(100%);
+  top: -55px;
+  margin: -286px -40px 0;
+  background-color: #1a1b22;
+  border-radius: 0 0 16px 16px;
+  transition: all 0.6s, 0.6s ease;
+  -moz-transition: all 0.6s, 0.6s ease;
+  transform: translateY(100%);
 }
 
+.mobile-menu_opened {
+  display: flex;
+  margin-top: 0;
+  transition: all 0s, 0.6s ease;
+  -moz-transition: all 0s, 0.6s ease;
+}
 
-.mobile-menu__container {
-  margin-top: 72px;
-}
+  .mobile-menu__container {
+        display: none;
+  }
+
+@media screen and (max-width: 620px) {
+  .mobile-menu {
+  display: flex;
+
+  }
+
+  .menu-mobile__container {
+    display: flex;
+    flex-direction: column;
+    width: 358px;
+    margin: auto;
+    padding: 70px 16px 22px;
+  }
+
 }
 
-@media screen and (max-width: 432px) {
-.mobile-menu {
-  padding-left:16px;
-   padding-right:16px;
+@media screen and (max-width: 500px) {
+    .mobile-menu {
+  margin-left: -16px;
+  margin-right: -16px;
+  }
+  .menu-mobile__container {
+    width: 288px;
+  }
 }
-}
+
+*/

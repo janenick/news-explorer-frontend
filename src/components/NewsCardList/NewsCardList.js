@@ -19,29 +19,31 @@ function NewsCardList(props) {
 
   return (
     <section className='news-cards page__news-cards'>
-      {main ? <>
-        <p className='news-cards__title'>Результаты поиска</p>
-        <ul className='news-cards__container'>
-          {props.articles.slice(0, props.rowArticles).map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
-        </ul>
+      <div className='news-cards__container'>
+        {main ? <>
+          <p className='news-cards__title'>Результаты поиска</p>
+          <ul className='news-cards__list'>
+            {props.articles.slice(0, props.rowArticles).map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
+          </ul>
 
-        <div className='news-cards__btn-position'>
-          {(props.articles.length - props.rowArticles > 0) && <Button
-            classNameBtn='more-results'
-            className='button_type_more-results'
-            image={false}
-            title='Показать еще'
-            onClick={props.handleShowMoreArticles}
-          />
-          }
-        </div>
+          <div className='news-cards__btn-position'>
+            {(props.articles.length - props.rowArticles > 0) && <Button
+              classNameBtn='more-results'
+              className='button_type_more-results'
+              image={false}
+              title='Показать еще'
+              onClick={props.handleShowMoreArticles}
+            />
+            }
+          </div>
 
 
-      </> :
-        <ul className='news-cards__container'>
-          {props.articles.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
-        </ul>
-      }
+        </> :
+          <ul className='news-cards__list'>
+            {props.articles.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
+          </ul>
+        }
+      </div>
     </section>
   );
 }
