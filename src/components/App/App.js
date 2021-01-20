@@ -99,10 +99,11 @@ function App() {
   return (
     <>
         <Header
-          loggedIn={loggedIn}
-          pathname={pathname}
-          handleLogin={handleLoginPopupOpen}
-          handleSignOut={handleSignOut}
+        loggedIn={loggedIn}
+        pathname={pathname}
+        handleLogin={handleLoginPopupOpen}
+        handleSignOut={handleSignOut}
+        hasOpenPopup={isLoginPopupOpen || isRegisterPopupOpen}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}

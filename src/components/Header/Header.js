@@ -65,7 +65,7 @@ function Header(props) {
 
   return (
     <header className={`header ${main ? 'header__bg' : 'header_saved-news header__bg_saved-news'} page__header`}>
-      <div className={`header__container ${isMobileMenuOpened ? 'header__container_mobile' : ''}`}>
+      <div className={`header__container ${(isMobileMenuOpened && !props.hasOpenPopup) ? 'header__container_mobile' : ''}`}>
         <span className={`header__border ${main ? '' : 'header__border_saved-news'}`} />
         <Link navLink={true} title='Перейти на страницу с поиском' to='/'
           className={classNameLogo}

@@ -16,12 +16,13 @@
     height: 24px;
     top: -40px;
     right: 16px;
+    background-image: url(../../../images/icons/mobile-menu-main-close.svg);
   }
 }
 
 .close-btn:hover {
   opacity: 0.6;
-  transition: opacity linear .2s;
+  transition: opacity linear 0.2s;
 }
 
 .close-btn:focus {

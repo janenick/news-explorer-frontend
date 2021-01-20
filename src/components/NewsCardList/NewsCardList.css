@@ -49,14 +49,6 @@
 }
 }
 
-/* @media screen and (max-width: 800px) {
-  .news-cards {
-    max-width: 768px;
-    padding-left: 40px;
-    padding-right: 40px;
-
-  }
-  */
 @media screen and (max-width: 800px) {
   .news-cards__list {
     grid-template-columns: repeat(auto-fill, 224px);
@@ -79,9 +71,8 @@
   }
 }
 
-@media screen and (max-width: 432px) {
+@media screen and (max-width: 500px) {
   .news-cards {
-    max-width: 320px;
      margin: 0 -16px;
   }
 

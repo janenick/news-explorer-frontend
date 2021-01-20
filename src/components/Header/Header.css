@@ -1,6 +1,6 @@
 .header {
   height: 80px;
-  background-image: url('../../images/navigation-bg.jpg');
+  background-image: url("../../images/navigation-bg.jpg");
 }
 
 .header__container {
@@ -11,19 +11,12 @@
   align-items: center;
   position: relative;
   z-index: 2;
-  /*box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
-  background: rgba(196, 196, 196, 0.01);
-  */
 }
 
 .header__container_mobile {
   background-color: #1a1b22;
 }
 
-/*.header_saved-news {
-  box-shadow: inset 0px -1px 0px #d1d2d6;
-}
-*/
 .header__border {
   position: absolute;
   top: 80px;
