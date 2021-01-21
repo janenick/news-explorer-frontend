@@ -11,8 +11,8 @@ body {
   min-width: calc(320px - 32px);
   margin: 0 auto;
   color: #1A1B22;
-  background-color: #347EFF;
-  /*background-color: #FFFFFF;*/
+  /*background-color: #347EFF;*/
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
 }

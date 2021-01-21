@@ -10,6 +10,13 @@
   cursor: pointer;
 }
 
+
+@media screen and (max-width: 532px) {
+  .close-btn {
+    right: 0;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .close-btn {
     width: 24px;

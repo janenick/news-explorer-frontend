@@ -15,6 +15,7 @@ import Preloader from '../Preloader/Preloader';
 import articles from '../../utils/allNews';
 
 function App() {
+  const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
@@ -67,8 +68,7 @@ function App() {
   }
 
   const handleLogin = (data) => {
-    console.log('handleLogin.data', data);
-    setLoggedIn(true);
+     setLoggedIn(true);
     setIsLoginPopupOpen(false);
     handleInfoTooltipOpen('Пользователь выполнил вход!');
   }
@@ -96,14 +96,26 @@ function App() {
     };
   });
 
+  //отслеживаем размеры экрана для изменения меню
+  React.useEffect(() => {
+    function changeScreenSize(e) {
+      setScreenWidth(e.target.innerWidth);
+    }
+    window.addEventListener('resize', changeScreenSize);
+    return () => {
+      window.removeEventListener('resize', changeScreenSize);
+    }
+  }, [])
+
   return (
     <>
-        <Header
+      <Header
         loggedIn={loggedIn}
         pathname={pathname}
         handleLogin={handleLoginPopupOpen}
         handleSignOut={handleSignOut}
         hasOpenPopup={isLoginPopupOpen || isRegisterPopupOpen}
+        screenWidth={screenWidth}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}
@@ -124,7 +136,7 @@ function App() {
             />
           </Route>
         </Switch>
-        <Footer />
+      <Footer screenWidth={screenWidth} />
 
         <LoginPopup
           name='login'

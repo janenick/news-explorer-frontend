@@ -3,9 +3,10 @@ import React from 'react';
 import Link from '../Link/Link';
 import iconGithub from '../../images/icons/github.svg';
 import iconFacebookSquare from '../../images/icons/fb_square.svg';
+import iconFacebookCircle from '../../images/icons/fb_circle.svg';
 import './Footer.css';
 
-function Footer() {
+function Footer({ screenWidth}) {
   return (
     <footer className='footer page__footer'>
       <p className='footer__copyright'>&copy; 2020 Supersite, Powered by News API</p>
@@ -35,7 +36,7 @@ function Footer() {
               title='Открыть сайт Facebook в новом окне'
               href='https://www.facebook.com'
               className='footer__link' to='/'
-              src={iconFacebookSquare} alt='Facebook' />
+              src={(screenWidth <= 800 && screenWidth > 500) ? iconFacebookCircle : iconFacebookSquare} alt='Facebook' />
           </li>
         </ul>
       </div>

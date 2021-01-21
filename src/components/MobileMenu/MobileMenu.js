@@ -6,7 +6,6 @@ import logoutImgMain from '../../images/icons/logout-main.svg';
 import './MobileMenu.css';
 
 const MobileMenu = (props) => {
-  console.log('this is MobileMenu');
   return (
 
     <div className='mobile-menu mobile-menu_opened'>

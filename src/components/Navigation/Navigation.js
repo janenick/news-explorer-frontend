@@ -10,8 +10,6 @@ function Navigation(props) {
   const main = props.main;
   const classNameTextMain = `nav__text ${isMenuMobile ? 'nav__text_mobile' : (main ? 'nav__text_selected': 'nav__text_saved-news')}`;
   const classNameTextSavedNews = `nav__text  ${isMenuMobile ? 'nav__text_mobile' : (main ? '' : 'nav__text_saved-news nav__text_selected-saved-news')}`;
-  console.log('Navigation.main', main);
-  console.log('Navigation.isMenuMobile', isMenuMobile);
 
   return (
     <nav className='nav'>

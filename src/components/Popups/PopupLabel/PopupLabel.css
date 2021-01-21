@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+.popup__input::placeholder {
+  color: rgba(0, 0, 0, .2);
+}
+
 .popup__input-error {
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
