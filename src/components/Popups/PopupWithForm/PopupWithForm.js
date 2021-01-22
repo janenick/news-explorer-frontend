@@ -11,7 +11,7 @@ function PopupWithForm(props) {
   return (
     <Overlay isOpen={props.isOpen} onClick={props.onClose }>
       <Modal isOpen={props.isOpen}>
-        <CloseButton title="Закрыть" onClick={props.onClose} />
+        <CloseButton title='Закрыть' onClick={props.onClose} />
         <PopupForm
           name={props.name}
           title={props.title}

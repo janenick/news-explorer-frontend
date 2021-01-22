@@ -14,7 +14,7 @@ function InfoTooltip({
 
     <Overlay isOpen={isOpen} onClick={onClose}>
       <Modal isOpen={isOpen}>
-        <CloseButton title="Закрыть" onClick={onClose} />
+        <CloseButton title='Закрыть' onClick={onClose} />
 
         <p className='info-tooltip__text'>{message}</p>
         {canAuth && <p className='info-tooltip__link' onClick={onChangeForm}>Войти</p>}

@@ -1,18 +1,13 @@
 .header {
   height: 80px;
-
-  }
-
-.header_type_bg {
-background: url("../../images/navigation-bg.jpg");
 }
 
 .header_type_one-colour {
-background: #1a1b22;
+  background: #1a1b22;
 }
 
 .header_type_saved-news {
-background: #ffffff;
+  background: #ffffff;
 }
 
 .header__container {
@@ -54,7 +49,7 @@ background: #ffffff;
 }
 
 .header__logo {
-  font-family: "Roboto Slab", Arial, sans-serif;
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -86,12 +81,12 @@ background: #ffffff;
 @media screen and (max-width: 620px) {
   .header {
     height: 55px;
-     margin-left: -16px;
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin-left: -40px;
+    margin-right: -40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: relative;
   }
-
 
   .header__border {
     top: 55px;
@@ -103,6 +98,13 @@ background: #ffffff;
 }
 
 @media screen and (max-width: 500px) {
+  .header {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+  }
   .header__border {
     margin: 0 -16px;
   }

@@ -13,31 +13,27 @@ import './Header.css';
 function Header(props) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = React.useState(false);
   const [useMobileMenu, setUseMobileMenu] = React.useState(false);
-  const mobileOnly = isMobileMenuOpened && props.hasOpenPopup;
   const main = (props.pathname === '/' || isMobileMenuOpened);
+  const mobilePopupOpened = isMobileMenuOpened && props.hasOpenPopup && main;
   const classNameLogo = `header__logo ${main ? '' : 'header__logo_saved-news'}`;
 
+  // изменяем background в зависимости от состояния страницы и попапов
   let classNameHeader = 'header page__header';
-  let classNameHeaderCont = 'header__container';
-  
   if (isMobileMenuOpened) {
     if (props.hasOpenPopup) {
-      classNameHeader += `${ main ? ' header_type_bg': ' header_type_saved-news' }`;
-      classNameHeaderCont += ' header__container_type_one-colour';
+      classNameHeader += `${main ? ' header_type_bg' : ' header_type_saved-news'}`;
 
     } else {
-      classNameHeader += `${ main ? ' header_type_one-colour' : ' header_type_saved-news'}`;
-      classNameHeaderCont += `${ main ? '' : ' header__container_type_saved-news'}`;
+      classNameHeader += `${main ? ' header_type_one-colour' : ' header_type_saved-news'}`;
     }
   } else {
-    classNameHeader += `${ main ? ' header_type_bg' : ' header_type_saved-news'}`;
-    classNameHeaderCont += `${ main ? '' : ' header__container_type_saved-news'}`;
+    classNameHeader += `${main ? ' header_type_bg' : ' header_type_saved-news'}`;
   }
   const logout = main ? 'logout-main' : 'logout-saves-news';
   const logoutImg = main ? logoutImgMain : logoutImgSavedNews
 
   function toggleMenu() {
-     setIsMobileMenuOpened(!isMobileMenuOpened);
+    setIsMobileMenuOpened(!isMobileMenuOpened);
   }
 
   //изменяем статус меню в зависимости от размеров экрана
@@ -63,13 +59,24 @@ function Header(props) {
     return () => document.removeEventListener('mousedown', handleOverlayClose);
   }, []);
 
+  //закрытие моб. меню по клавише 'Escape'
+  React.useEffect(() => {
+    const handleEsc = (evt) => {
+      if (evt.key === 'Escape') {
+        setIsMobileMenuOpened(false);
+      }
+    }
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
+
   return (
     <header className={classNameHeader}>
-      <div className={classNameHeaderCont}>
+      <div className='header__container'>
         <span className={`header__border ${main ? '' : 'header__border_saved-news'}`} />
         <Link navLink={true} title='Перейти на страницу с поиском' to='/'
           className={classNameLogo}
-          value='NewsExplorer' />
+          value={`${mobilePopupOpened ? '' : 'NewsExplorer'}`} />
 
         <div className='header__menu'>
           <Navigation loggedIn={props.loggedIn} main={main} />

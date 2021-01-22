@@ -1,5 +1,5 @@
 .footer {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   min-height: 80px;
@@ -44,7 +44,7 @@
 }
 
 .footer__link {
-  font-family: "Roboto", "Inter", "Arial", sans-serif;
+  font-family: 'Roboto', 'Inter', 'Arial', sans-serif;
   display: flex;
   color: #1a1b22;
   font-size: 18px;

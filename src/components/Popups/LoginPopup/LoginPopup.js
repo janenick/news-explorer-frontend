@@ -23,22 +23,22 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
     <PopupWithForm
       login={true}
       name='login'
-      title="Вход"
+      title='Вход'
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleFormSubmit}
       onChangeForm={onChangeForm}
       isDisabled={!isValid}
-      formButtonText="Войти"
+      formButtonText='Войти'
     >
       <PopupLabel
         label='E-mail'
         id='email' required
         error={errors.email}
         value={values.email || ''}
-        name="email"
-        type="email"
-        placeholder="Введите почту"
+        name='email'
+        type='email'
+        placeholder='Введите почту'
         onChange={handleInputChange}
         noValidate
       >
@@ -48,9 +48,9 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
         id='email' required
         error={errors.password}
         value={values.password || ''}
-        name="password"
-        type="password"
-        placeholder="Введите пароль"
+        name='password'
+        type='password'
+        placeholder='Введите пароль'
         onChange={handleInputChange}
         noValidate
         minLength='8'
