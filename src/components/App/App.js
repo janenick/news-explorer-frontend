@@ -14,6 +14,9 @@ import Preloader from '../Preloader/Preloader';
 
 import articles from '../../utils/allNews';
 
+import CurrentUserContext from '../../contexts/currentUserContext';
+import * as auth from '../../utils/auth';
+
 function App() {
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
@@ -22,10 +25,23 @@ function App() {
   const [tooltipMessage, setTooltipMessage] = React.useState('');
   const [tooltipCanAuth, setTooltipCanAuth] = React.useState(false);
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
   const [rowArticles, setRowArticles] = React.useState(3);
   const { pathname } = useLocation();
+
+  // --> авторизация
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [userName, setUserName] = React.useState('');
+  const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(true);
+  const [registerError, setRegisterError] = React.useState('');
+
   const history = useHistory();
+  // <-- авторизация
+
+  function handleError(err) {
+    // renderError(`Ошибка: ${err}`);
+    handleInfoTooltipOpen(false, `Что-то пошло не так: \n ${err}`);
+  }
 
   function handleShowMoreArticles() {
     setRowArticles(rowArticles + 3);
@@ -42,6 +58,7 @@ function App() {
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
+    // setTooltipCanAuth(false);
   }
 
   function handleInfoTooltipOpen(message, canAuth = false) {
@@ -62,22 +79,86 @@ function App() {
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(true);
   }
-  const handleRegister = () => {
-    setIsRegisterPopupOpen(false);
-    handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
+  const handleRegister = (userData) => {
+    console.log('handleRegister.userData', userData);
+    auth.register(userData.email, userData.password, userData.name)
+      .then((res) => {
+        console.log('handleRegister.res: ', res);
+        if (res.data.email) {
+          /* setIsRegisterSuccess(true);
+          setRegisterError('');
+          */
+          setIsRegisterPopupOpen(false);
+          handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
+
+        } else {
+          return new Promise().reject();
+        }
+
+      })
+      .catch((err) => {
+        console.log('handleRegister.err', err);
+        setIsRegisterSuccess(false);
+        if (err.data) {
+
+          if (err.data.message) {
+            setRegisterError(err.data.message);
+          } else {
+            setRegisterError(err.data.error);
+          }
+        } else {
+          setRegisterError('Что-то пошло не так');
+        }
+
+      });
+    // setIsRegisterPopupOpen(false);
+    // handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
   }
 
   const handleLogin = (data) => {
-     setLoggedIn(true);
-    setIsLoginPopupOpen(false);
-    handleInfoTooltipOpen('Пользователь выполнил вход!');
+    /* setLoggedIn(true);
+   setIsLoginPopupOpen(false);
+   handleInfoTooltipOpen('Пользователь выполнил вход!');*/
+
+    // авторизация
+    auth.authorize(email, password)
+      .then((res) => {
+        auth.getContent(res.data.token).then((user) => {
+          if (user.data) {
+            setCurrentUser(user.data);
+
+            localStorage.setItem('token', res.data.token);
+            // setUserName(emailUser);
+            setLoggedIn(true);
+          } else {
+            return new Promise().reject();
+          }
+        });
+      })
+      .catch((err) => {
+        if (err.data) {
+          onOpenPopupInfoTooltip(false, err.data.message);
+        } else {
+          onOpenPopupInfoTooltip(false, 'Что-то пошло не так');
+        }
+      });
   }
+
+
+  /* React.useEffect(() => {
+    api.getUserInfo().then((initialUserInfo) => {
+      setCurrentUser(initialUserInfo);
+    })
+      .catch((err) => console.error(err));
+  }, []);
+  */
+
 
   const handleSignOut = () => {
     // выход из профиля
-    /* localStorage.removeItem('token');
-    setEmail('');
-    */
+    localStorage.removeItem('token');
+    setUserName('');
+
     setLoggedIn(false);
     history.push('/');
   };
@@ -109,18 +190,19 @@ function App() {
 
   return (
     <>
-      <Header
-        loggedIn={loggedIn}
-        pathname={pathname}
-        handleLogin={handleLoginPopupOpen}
-        handleSignOut={handleSignOut}
-        hasOpenPopup={isLoginPopupOpen || isRegisterPopupOpen}
-        screenWidth={screenWidth}
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header
+          loggedIn={loggedIn}
+          pathname={pathname}
+          handleLogin={handleLoginPopupOpen}
+          handleSignOut={handleSignOut}
+          hasOpenPopup={isLoginPopupOpen || isRegisterPopupOpen}
+          screenWidth={screenWidth}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}
             <Main
-             loggedIn={loggedIn}
+              loggedIn={loggedIn}
               pathname={pathname}
               articles={articles}
               rowArticles={rowArticles}
@@ -129,14 +211,14 @@ function App() {
             />
           </Route>
           <Route path='/saved-news'> {/* Сохраненные новости */}
-         <SavedNews
+            <SavedNews
               loggedIn={loggedIn}
               pathname={pathname}
               articles={articles}
             />
           </Route>
         </Switch>
-      <Footer screenWidth={screenWidth} />
+        <Footer screenWidth={screenWidth} />
 
         <LoginPopup
           name='login'
@@ -152,6 +234,8 @@ function App() {
           isOpen={isRegisterPopupOpen}
           onClose={closeAllPopups}
           onChangeForm={handleLoginPopupOpen}
+          registerError={registerError}
+          isRegisterSuccess={isRegisterSuccess}
         />
 
         <InfoTooltip
@@ -166,6 +250,7 @@ function App() {
         <Preloader
           isOpen={isPreloaderOpen}
         />
+      </CurrentUserContext.Provider>
     </>
   );
 }
