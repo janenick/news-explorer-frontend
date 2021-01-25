@@ -3,7 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import PopupLabel from '../PopupLabel/PopupLabel';
 import validateForm from '../../../utils/validateForm';
 
-function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm, registerError, isRegisterSuccess }) {
+function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm, actionError, isActionSuccess }) {
 
   const {
     values, handleInputChange, errors, isValid, resetForm,
@@ -23,8 +23,8 @@ function RegisterPopup({ handleRegister, isOpen, onClose, onChangeForm, register
 
     <PopupWithForm
       register={true}
-      registerError={registerError}
-      isRegisterSuccess={isRegisterSuccess}
+      actionError={actionError}
+      isActionSuccess={isActionSuccess}
       name='register'
       title='Регистрация'
       isOpen={isOpen}

@@ -32,8 +32,12 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [userName, setUserName] = React.useState('');
-  const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(true);
+  /* const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(true);
   const [registerError, setRegisterError] = React.useState('');
+  */
+  const [isActionSuccess, setIsActionSuccess] = React.useState(true);
+  const [actionError, setActionError] = React.useState('');
+
 
   const history = useHistory();
   // <-- авторизация
@@ -53,6 +57,10 @@ function App() {
     setTimeout(() => setIsPreloaderOpen(false), 1000);
   }
 
+  function onSetErrorStatus(status, message) {
+    setIsActionSuccess(status);
+    setActionError(message);
+  }
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
@@ -69,13 +77,20 @@ function App() {
     setIsInfoTooltipPopupOpen(true);
   }
 
+  function deleteActionError() {
+    setIsActionSuccess(true);
+    setActionError(true);
+  }
+
   function handleLoginPopupOpen() {
+    deleteActionError();
     setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
     setIsLoginPopupOpen(true);
   }
 
   function handleRegisterPopupOpen() {
+    deleteActionError();
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(true);
   }
@@ -85,9 +100,6 @@ function App() {
       .then((res) => {
         console.log('handleRegister.res: ', res);
         if (res.data.email) {
-          /* setIsRegisterSuccess(true);
-          setRegisterError('');
-          */
           setIsRegisterPopupOpen(false);
           handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
 
@@ -98,49 +110,53 @@ function App() {
       })
       .catch((err) => {
         console.log('handleRegister.err', err);
-        setIsRegisterSuccess(false);
+        let errMessage = 'Что-то пошло не так';
+
         if (err.data) {
 
           if (err.data.message) {
-            setRegisterError(err.data.message);
+            errMessage = err.data.message;
           } else {
-            setRegisterError(err.data.error);
+            errMessage = err.data.error;
           }
-        } else {
-          setRegisterError('Что-то пошло не так');
         }
-
+        onSetErrorStatus(false, errMessage);
       });
-    // setIsRegisterPopupOpen(false);
-    // handleInfoTooltipOpen('Пользователь успешно зарегистрирован!', true);
   }
 
-  const handleLogin = (data) => {
+  const handleLogin = (userData) => {
     /* setLoggedIn(true);
    setIsLoginPopupOpen(false);
    handleInfoTooltipOpen('Пользователь выполнил вход!');*/
-
+    console.log('handleLogin.userData: ', userData);
     // авторизация
-    auth.authorize(email, password)
+    auth.authorize(userData.email, userData.password)
       .then((res) => {
+        console.log('Sucssess! authorize.res: ', res);
         auth.getContent(res.data.token).then((user) => {
-          if (user.data) {
+          console.log('getContent.user: ', user);
+           if (user.data) {
             setCurrentUser(user.data);
 
             localStorage.setItem('token', res.data.token);
-            // setUserName(emailUser);
-            setLoggedIn(true);
+             setUserName(user.data.name);
+             setLoggedIn(true);
+             setIsLoginPopupOpen(false);
+             handleInfoTooltipOpen('Пользователь выполнил вход!');
           } else {
             return new Promise().reject();
           }
         });
+
+
       })
       .catch((err) => {
+        console.log('authorize.err: ', err);
+        let errMessage = 'Что-то пошло не так';
         if (err.data) {
-          onOpenPopupInfoTooltip(false, err.data.message);
-        } else {
-          onOpenPopupInfoTooltip(false, 'Что-то пошло не так');
+          errMessage = err.data.message;
         }
+        onSetErrorStatus(false, errMessage);
       });
   }
 
@@ -198,6 +214,7 @@ function App() {
           handleSignOut={handleSignOut}
           hasOpenPopup={isLoginPopupOpen || isRegisterPopupOpen}
           screenWidth={screenWidth}
+          userName={userName}
         />
         <Switch>
           <Route exact path='/'> {/* Главная */}
@@ -226,6 +243,8 @@ function App() {
           isOpen={isLoginPopupOpen}
           onClose={closeAllPopups}
           onChangeForm={handleRegisterPopupOpen}
+          actionError={actionError}
+          isActionSuccess={isActionSuccess}
         />
 
         <RegisterPopup
@@ -234,8 +253,8 @@ function App() {
           isOpen={isRegisterPopupOpen}
           onClose={closeAllPopups}
           onChangeForm={handleLoginPopupOpen}
-          registerError={registerError}
-          isRegisterSuccess={isRegisterSuccess}
+          actionError={actionError}
+          isActionSuccess={isActionSuccess}
         />
 
         <InfoTooltip

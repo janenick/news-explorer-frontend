@@ -19,7 +19,7 @@ function PopupWithForm(props) {
         >
           {props.children}
 
-          {!props.isRegisterSuccess && <span className='popup__error'>{props.registerError}</span>}
+          {!props.isActionSuccess && <span className={`popup__error ${props.register ? '' : 'popup__error_login'} `}>{props.actionError}</span>}
             <Button
             disabled={props.anyInputInvalid}
             type='submit'

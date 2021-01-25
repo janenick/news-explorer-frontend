@@ -24,7 +24,7 @@ export const authorize = (email, password) => fetch(`${baseUrl}/signin`, {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ password, email }),
+  body: JSON.stringify({ email, password }),
 })
   .then(checkResponce);
 

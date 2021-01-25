@@ -36,6 +36,10 @@
   margin-top: calc(100% - 63px);
 }
 
+.popup__error_login {
+  margin-top: calc(100% - 145px);
+}
+
 .popup__error_opened {
   display: block;
   position: absolute;
@@ -46,7 +50,11 @@
   .popup__error {
     margin-top: 290px;
   }
-  
+
+  .popup__error_login {
+    margin-top: 210px;
+  }
+
   .popup__action-text {
     text-align: center;
   }

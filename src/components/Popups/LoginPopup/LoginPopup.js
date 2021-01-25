@@ -3,7 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import PopupLabel from '../PopupLabel/PopupLabel';
 import validateForm from '../../../utils/validateForm';
 
-function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
+function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm, actionError, isActionSuccess }) {
 
   const {
     values, handleInputChange, errors, isValid, resetForm,
@@ -22,6 +22,8 @@ function LoginPopup({ handleLogin, isOpen, onClose, onChangeForm }) {
 
     <PopupWithForm
       login={true}
+      actionError={actionError}
+      isActionSuccess={isActionSuccess}
       name='login'
       title='Вход'
       isOpen={isOpen}

@@ -86,7 +86,7 @@ function Header(props) {
               classNameBtn={logout}
               className={`button_type_${logout}`}
               image={true}
-              title='Грета'
+              title={props.userName}
               src={logoutImg}
               alt='Выход'
               onClick={props.handleSignOut}
