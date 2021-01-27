@@ -5,6 +5,11 @@ import './NewsCard.css';
 
 const NewsCard = ({ card, tooltip, iconSave }) => {
   // const currentUser = React.useContext(CurrentUserContext);
+  const date = new Date(card.date);
+  const fullDate = `${date.toLocaleString('ru', {
+    day: 'numeric',
+    month: 'long',
+  })}, ${date.getFullYear()}`;
 
   const [isSavedMark, setIsSavedMark] = React.useState(false);
 
@@ -31,7 +36,7 @@ const NewsCard = ({ card, tooltip, iconSave }) => {
       <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
         <img className='news-card__img' src={card.image} alt={card.title} />
         <div className='news-card__info'>
-          <p className='news-card__date'>{card.date}</p>
+          <p className='news-card__date'>{fullDate}</p>
           <h3 className='news-card__title'>{makeTitle(card.title)}</h3>
           <p className='news-card__text'>{card.text}</p>
         </div>

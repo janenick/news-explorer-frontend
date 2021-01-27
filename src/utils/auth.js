@@ -1,4 +1,6 @@
-const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
+import { main_url } from './config';
+
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || main_url}`;
 
 const checkResponce = (res) => new Promise((resolve, reject) => {
   const func = res.status < 400 ? resolve : reject;

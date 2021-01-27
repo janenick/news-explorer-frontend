@@ -6,27 +6,17 @@ import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
 function Main(props) {
-  // чтобы увидеть секцию NoResults, надо удалить статьи из utils/allNews.js
-  function showArticles() {
-    if (props.articles.length) {
       return (
-        <NewsCardList
+      <main className='main'>
+        <SearchForm handleSearchArticles={props.handleSearchArticles} />
+        {props.notFound && <NoResults />}
+        {props.articles.length !== 0 && <NewsCardList
           pathname={props.pathname}
           articles={props.articles}
           rowArticles={props.rowArticles}
           handleShowMoreArticles={props.handleShowMoreArticles}
         />
-      )
-    }
-      return (
-        <NoResults />
-      )
-    }
-
-    return (
-      <main className='main'>
-        <SearchForm handleSearchArticles={props.handleSearchArticles} />
-        {showArticles()}
+        }
         <About />
       </main>
     );

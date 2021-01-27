@@ -15,7 +15,7 @@ function NewsCardList(props) {
     iconSave = false;
     main = false;
   }
-
+  console.log('NewsCardList.props.articles', props.articles);
 
   return (
     <section className='news-cards page__news-cards'>
