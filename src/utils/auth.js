@@ -5,7 +5,7 @@ const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || m
 const checkResponce = (res) => new Promise((resolve, reject) => {
   const func = res.status < 400 ? resolve : reject;
   res.json().then((data) => {
-    func({ status: res.status, data });
+        func({ status: res.status, data });
   });
 });
 

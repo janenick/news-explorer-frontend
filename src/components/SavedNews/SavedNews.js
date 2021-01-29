@@ -10,7 +10,8 @@ const SavedNews = (props) => {
   return (
     <main>
       <SavedNewsHeader />
-      <NewsCardList pathname={props.pathname} articles={props.articles }/>
+      <NewsCardList pathname={props.pathname} articles={props.articles}
+        screenWidth={props.screenWidth} handleError={props.handleError}/>
     </main>
   );
 

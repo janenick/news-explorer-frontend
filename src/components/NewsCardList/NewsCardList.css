@@ -1,5 +1,6 @@
 .news-cards {
   background: #f5f6f7;
+  /*background-color: #347EFF;*/
   max-width: calc(1440px + 208px);
   margin: 0 -104px;
 }

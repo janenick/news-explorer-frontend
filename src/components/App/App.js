@@ -48,17 +48,63 @@ function App() {
     handleInfoTooltipOpen(`Что-то пошло не так: \n ${err}`);
   }
 
+  const handleArticleRequest = ({
+    keyword,
+    title,
+    text,
+    date,
+    source,
+    link,
+    image,
+  }) => {
+    return mainApi.addNewArticle({
+      keyword,
+      title,
+      text,
+      date,
+      source,
+      link,
+      image,
+    })
+  }
+
+  // function handleAddArticle({ name, link }) {
+  function handleAddArticle(article) {
+    console.log('handleAddArticle', article);
+    if (!loggedIn) {
+      handleLoginPopupOpen();
+      return false;
+    } else {
+      setIsPreloaderOpen(true);
+      let isSuccess = false;
+      mainApi.addNewArticle(article).then((newArticle) => {
+        // Обновляем стейт карточек
+        // setCards([newCard.card, ...cards]);
+        console.log('newArticle:', newArticle);
+        article._id = newArticle._id;
+        isSuccess =  true;
+      })
+        .catch((err) => {
+          handleError(err);
+        })
+        .finally(() => {
+          setIsPreloaderOpen(false);
+          return isSuccess;
+        });
+    }
+  }
+
   function convertArticlesArray(articlesArray, keyword) {
-        const newArray = articlesArray.map(article => ({
-          _id: '',
-          keyword: keyword,
-          title: article.title,
-          text: article.description,
-          date: article.publishedAt,
-          source: article.source.name,
-          link: article.url,
-          image: article.urlToImage,
-      }));
+    const newArray = articlesArray.map(article => ({
+      _id: '',
+      keyword: keyword,
+      title: article.title,
+      text: article.description,
+      date: article.publishedAt,
+      source: article.source.name,
+      link: article.url,
+      image: article.urlToImage,
+    }));
     return newArray;
   }
 
@@ -72,24 +118,22 @@ function App() {
       handleInfoTooltipOpen('Введите непустое слово.');
       setIsPreloaderOpen(false);
       return;
-//      setSearchArticlesArray([]);
+      //      setSearchArticlesArray([]);
     }
     // setIsPreloaderOpen(true);
     console.log('Ищем статьи по ключу: ', searchWord);
     searchArticles(searchWord)
-     .then((data) => {
-       console.log('handleSearchArticles.data:', data);
-       console.log('articles from config:', articles);
-       if (data.articles.length !== 0) {
-         const convertArticles = convertArticlesArray(data.articles, searchWord);
-         setSearchArticlesArray(convertArticles);
-       } else {
-         setNotFound(true);
-       }
+      .then((data) => {
+        if (data.articles.length !== 0) {
+          const convertArticles = convertArticlesArray(data.articles, searchWord);
+          setSearchArticlesArray(convertArticles);
+          } else {
+          setNotFound(true);
+        }
       })
       .catch(err => console.log(err))
       .finally(() => { setIsPreloaderOpen(false) });
-       }
+  }
   function handleSearchArticles(keyword) {
     setSearchArticlesArray([]);
     setNotFound(false);
@@ -108,7 +152,6 @@ function App() {
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
-    // setTooltipCanAuth(false);
   }
 
   function handleInfoTooltipOpen(message, canAuth = false) {
@@ -277,9 +320,13 @@ function App() {
               pathname={pathname}
               articles={searchArticlesArray}
               rowArticles={rowArticles}
+              screenWidth={screenWidth}
               handleShowMoreArticles={handleShowMoreArticles}
               handleSearchArticles={handleSearchArticles}
-              notFound={notFound }
+              notFound={notFound}
+              onAddArticle={handleAddArticle}
+              handleArticleRequest={handleArticleRequest}
+              handleError={handleError }
             />
           </Route>
           <Route path='/saved-news'> {/* Сохраненные новости */}
@@ -287,6 +334,8 @@ function App() {
               loggedIn={loggedIn}
               pathname={pathname}
               articles={searchArticlesArray}
+              screenWidth={screenWidth}
+              handleError={handleError}
             />
           </Route>
         </Switch>

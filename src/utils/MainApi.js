@@ -38,7 +38,15 @@ class MainApi {
       .then(_handleError);
   }
 
-  addNewArticle({ name, link }) {
+  addNewArticle({
+    keyword,
+    title,
+    text,
+    date,
+    source,
+    link,
+    image,
+  }) {
     return fetch(`${this._baseUrl}/articles`, {
       method: 'POST',
       headers: {
@@ -46,8 +54,13 @@ class MainApi {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
-        name,
-        link,
+          keyword,
+          title,
+          text,
+          date,
+          source,
+          link,
+          image,
       }),
     })
       .then(_handleError);

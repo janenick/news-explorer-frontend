@@ -15,7 +15,6 @@ function NewsCardList(props) {
     iconSave = false;
     main = false;
   }
-  console.log('NewsCardList.props.articles', props.articles);
 
   return (
     <section className='news-cards page__news-cards'>
@@ -23,7 +22,12 @@ function NewsCardList(props) {
         {main ? <>
           <p className='news-cards__title'>Результаты поиска</p>
           <ul className='news-cards__list'>
-            {props.articles.slice(0, props.rowArticles).map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
+            {props.articles.slice(0, props.rowArticles).map((card, i) => <NewsCard
+              key={i} card={card} tooltip={tooltip} iconSave={iconSave}
+              onAddArticle={props.onAddArticle} loggedIn={props.loggedIn}
+              handleArticleRequest={props.handleArticleRequest}
+              handleError={props.handleError}
+              screenWidth={props.screenWidth}/>)}
           </ul>
 
           <div className='news-cards__btn-position'>
