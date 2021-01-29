@@ -43,7 +43,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
   }
 
   function makeTitle(str, title = true) {
-    let strLength = 186;
+    let strLength = 146;
     if (title) {
       if (screenWidth > 800) {
         strLength = 60;

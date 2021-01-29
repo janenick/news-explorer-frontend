@@ -350,13 +350,14 @@ function App() {
               notFound={notFound}
               onAddArticle={handleAddArticle}
               handleArticleRequest={handleArticleRequest}
-              handleError={handleError }
+              onHandleError={handleError }
             />
           </Route>
           <Route path='/saved-news'> {/* Сохраненные новости */}
             <SavedNews
               loggedIn={loggedIn}
               pathname={pathname}
+              userName={userName}
               articles={savedArticlesArray}
               screenWidth={screenWidth}
               onHandleError={handleError}
