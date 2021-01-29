@@ -26,7 +26,7 @@ function NewsCardList(props) {
               key={i} card={card} tooltip={tooltip} iconSave={iconSave}
               onAddArticle={props.onAddArticle} loggedIn={props.loggedIn}
               handleArticleRequest={props.handleArticleRequest}
-              handleError={props.handleError}
+              onHandleError={props.onHandleError}
               screenWidth={props.screenWidth}/>)}
           </ul>
 
@@ -44,7 +44,7 @@ function NewsCardList(props) {
 
         </> :
           <ul className='news-cards__list'>
-            {props.articles.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} />)}
+            {props.articles.map((card, i) => <NewsCard key={i} card={card} tooltip={tooltip} iconSave={iconSave} onArticleDelete={props.onArticleDelete}/>)}
           </ul>
         }
       </div>

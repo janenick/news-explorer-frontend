@@ -3,7 +3,7 @@ import React from 'react';
 
 import './NewsCard.css';
 
-const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArticleRequest, handleError, screenWidth }) => {
+const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArticleRequest, onHandleError, onArticleDelete, screenWidth }) => {
   // const currentUser = React.useContext(CurrentUserContext);
   const date = new Date(card.date);
   const fullDate = `${date.toLocaleString('ru', {
@@ -33,8 +33,13 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
         console.log('card:', card);
         setIsSavedMark(true);
       })
-        .catch(err => handleError(`Статья не сохранилась. Ошибка: ${err}`));
-     }
+        .catch(err => onHandleError(`Статья не сохранилась. Ошибка: ${err}`));
+    }
+  }
+
+  function handleDeleteClick() {
+    onArticleDelete(card);
+    console.log('handleDeleteClick.card', card);
   }
 
   function makeTitle(str, title = true) {
@@ -55,7 +60,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
       }
     }
     return (str.length <= strLength ? str : `${str.slice(0, strLength)}...`);
-     }
+  }
 
   return (
     < li className='news-card'>
@@ -64,7 +69,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
           <button type='button' disabled={loggedIn ? false : true} className={`news-card__btn ${isSavedMark ? 'news-card__btn_type_save-marked' : 'news-card__btn_type_save'}`} onClick={handleSavedMark}></button>
         )
         : (
-          <button type='button' className='news-card__btn news-card__btn_type_trash'></button>
+          <button type='button' className='news-card__btn news-card__btn_type_trash' onClick={handleDeleteClick}></button>
         )
       }
       <div className={`news-card__tooltip ${loggedIn ? '' : 'news-card__tooltip_not-loggedin'}`}>{tooltip}</div>

@@ -28,6 +28,7 @@ function App() {
   const [tooltipCanAuth, setTooltipCanAuth] = React.useState(false);
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [searchArticlesArray, setSearchArticlesArray] = React.useState([]);
+  const [savedArticlesArray, setSavedArticlesArray] = React.useState([]);
   const [rowArticles, setRowArticles] = React.useState(3);
   const [notFound, setNotFound] = React.useState(false);
   const { pathname } = useLocation();
@@ -141,6 +142,19 @@ function App() {
     setIsPreloaderOpen(true);
     setRowArticles(3);
     getArticlesFromAPI(keyword);
+  }
+
+  function handleArticleDelete(article) {
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    mainApi.removeArticle(article._id).then(() => {
+      // Создаем копию массива, исключив из него удалённую карточку
+      const newArticles = savedArticlesArray.filter((art) => art._id !== article._id);
+      // Обновляем стейт
+      setSavedArticlesArray(newArticles);
+    })
+      .catch((err) => {
+        handleError(err);
+      });
   }
 
   function onSetErrorStatus(status, message) {
@@ -261,6 +275,16 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
+      mainApi.getArticlesFromServer().then((initialArticleList) => {
+        const articleList = initialArticleList.reverse().map((article) => article);
+        setSavedArticlesArray(articleList);
+      })
+        .catch((err) => console.error(err));
+    }
+  }, [loggedIn]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
       history.push('/');
     }
     // eslint-disable-next-line
@@ -333,9 +357,10 @@ function App() {
             <SavedNews
               loggedIn={loggedIn}
               pathname={pathname}
-              articles={searchArticlesArray}
+              articles={savedArticlesArray}
               screenWidth={screenWidth}
-              handleError={handleError}
+              onHandleError={handleError}
+              onArticleDelete={handleArticleDelete}
             />
           </Route>
         </Switch>

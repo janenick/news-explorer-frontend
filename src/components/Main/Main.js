@@ -19,7 +19,7 @@ function Main(props) {
             handleShowMoreArticles={props.handleShowMoreArticles}
             onAddArticle={props.onAddArticle}
             handleArticleRequest={props.handleArticleRequest}
-            handleError={props.handleError}
+            onHandleError={props.onHandleError}
         />
         }
         <About />

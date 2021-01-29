@@ -11,7 +11,8 @@ const SavedNews = (props) => {
     <main>
       <SavedNewsHeader />
       <NewsCardList pathname={props.pathname} articles={props.articles}
-        screenWidth={props.screenWidth} handleError={props.handleError}/>
+        screenWidth={props.screenWidth} onHandleError={props.onHandleError}
+        onArticleDelete={props.onArticleDelete}/>
     </main>
   );
 
