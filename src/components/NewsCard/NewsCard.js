@@ -3,17 +3,15 @@ import React from 'react';
 
 import './NewsCard.css';
 
-const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArticleRequest, onHandleError, onArticleDelete, screenWidth }) => {
+const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArticleRequest, onHandleError, onArticleDelete, handleBookmarkUnsavedClick, screenWidth }) => {
   // const currentUser = React.useContext(CurrentUserContext);
-  const date = new Date(card.date);
-  const fullDate = `${date.toLocaleString('ru', {
-    day: 'numeric',
-    month: 'long',
-  })}, ${date.getFullYear()}`;
-
   const [isSavedMark, setIsSavedMark] = React.useState(false);
 
-  function handleSavedMark() {
+  function toggleSavedMark() {
+    setIsSavedMark(!isSavedMark);
+  }
+
+/*  function handleSavedMark() {
     // isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
     console.log('card.isSavedMark', isSavedMark);
     if (isSavedMark) {
@@ -34,6 +32,20 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
         setIsSavedMark(true);
       })
         .catch(err => onHandleError(`Статья не сохранилась. Ошибка: ${err}`));
+    }
+  }
+  */
+
+  function handleSavedMark() {
+    // isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
+    if (!loggedIn) {
+      handleBookmarkUnsavedClick();
+    }
+    if (card.isSaved) {
+      // setIsSavedMark(false);
+      console.log('убираем флажок');
+    } else {
+      onAddArticle(card);
     }
   }
 
@@ -66,7 +78,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
     < li className='news-card'>
       { iconSave
         ? (
-          <button type='button' disabled={loggedIn ? false : true} className={`news-card__btn ${isSavedMark ? 'news-card__btn_type_save-marked' : 'news-card__btn_type_save'}`} onClick={handleSavedMark}></button>
+          <button type='button' className={`news-card__btn ${card.isSaved ? 'news-card__btn_type_save-marked' : 'news-card__btn_type_save'}`} onClick={handleSavedMark}></button>
         )
         : (
           <button type='button' className='news-card__btn news-card__btn_type_trash' onClick={handleDeleteClick}></button>
@@ -77,7 +89,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
       <a className='news-card__link' href={card.link} target='_blank' rel='noopener noreferrer'>
         <img className='news-card__img' src={card.image} alt={card.title} />
         <div className='news-card__info'>
-          <p className='news-card__date'>{fullDate}</p>
+          <p className='news-card__date'>{card.date}</p>
           <h3 className='news-card__title'>{makeTitle(card.title)}</h3>
           <p className='news-card__text'>{makeTitle(card.text, false)}</p>
         </div>

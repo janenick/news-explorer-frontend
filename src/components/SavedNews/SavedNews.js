@@ -12,7 +12,8 @@ const SavedNews = (props) => {
       <SavedNewsHeader userName={props.userName} articles={props.articles}/>
       <NewsCardList pathname={props.pathname} articles={props.articles}
         screenWidth={props.screenWidth} onHandleError={props.onHandleError}
-        onArticleDelete={props.onArticleDelete}/>
+        onArticleDelete={props.onArticleDelete}
+        handleBookmarkUnsavedClick={props.handleBookmarkUnsavedClick}/>
     </main>
   );
 

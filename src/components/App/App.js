@@ -18,6 +18,7 @@ import CurrentUserContext from '../../contexts/currentUserContext';
 import mainApi from '../../utils/mainApi';
 import * as auth from '../../utils/auth';
 import { searchArticles } from '../../utils/newsApi';
+import { converter } from '../../utils/utils.js';
 
 function App() {
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
@@ -47,6 +48,7 @@ function App() {
   function handleError(err) {
     // renderError(`Ошибка: ${err}`);
     handleInfoTooltipOpen(`Что-то пошло не так: \n ${err}`);
+    console.log('Ошибка: ', err);
   }
 
   const handleArticleRequest = ({
@@ -69,35 +71,35 @@ function App() {
     })
   }
 
-  // function handleAddArticle({ name, link }) {
   function handleAddArticle(article) {
     console.log('handleAddArticle', article);
-    if (!loggedIn) {
-      handleLoginPopupOpen();
-      return false;
-    } else {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
       setIsPreloaderOpen(true);
-      let isSuccess = false;
       mainApi.addNewArticle(article).then((newArticle) => {
-        // Обновляем стейт карточек
-        // setCards([newCard.card, ...cards]);
+
         console.log('newArticle:', newArticle);
         article._id = newArticle._id;
-        isSuccess =  true;
+        article.isSaved = true;
+        console.log('article:', article);
+        // Обновляем стейт карточек
+       // setSearchArticlesArray([newArticle, ...searchArticlesArray]);
+        setSavedArticlesArray([newArticle, ...savedArticlesArray]);
       })
         .catch((err) => {
           handleError(err);
         })
         .finally(() => {
           setIsPreloaderOpen(false);
-          return isSuccess;
         });
-    }
   }
 
-  function convertArticlesArray(articlesArray, keyword) {
+  /* function convertArticlesArray(articlesArray, keyword) {
     const newArray = articlesArray.map(article => ({
       _id: '',
+      isSaved: false,
       keyword: keyword,
       title: article.title,
       text: article.description,
@@ -108,6 +110,7 @@ function App() {
     }));
     return newArray;
   }
+  */
 
   function handleShowMoreArticles() {
     setRowArticles(rowArticles + 3);
@@ -121,14 +124,12 @@ function App() {
       return;
       //      setSearchArticlesArray([]);
     }
-    // setIsPreloaderOpen(true);
-    console.log('Ищем статьи по ключу: ', searchWord);
     searchArticles(searchWord)
       .then((data) => {
         if (data.articles.length !== 0) {
-          const convertArticles = convertArticlesArray(data.articles, searchWord);
+          const convertArticles = converter(data.articles, searchWord);
           setSearchArticlesArray(convertArticles);
-          } else {
+           } else {
           setNotFound(true);
         }
       })
@@ -350,7 +351,8 @@ function App() {
               notFound={notFound}
               onAddArticle={handleAddArticle}
               handleArticleRequest={handleArticleRequest}
-              onHandleError={handleError }
+              onHandleError={handleError}
+              handleBookmarkUnsavedClick={() => handleLoginPopupOpen()}
             />
           </Route>
           <Route path='/saved-news'> {/* Сохраненные новости */}

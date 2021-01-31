@@ -20,8 +20,8 @@ function Main(props) {
             onAddArticle={props.onAddArticle}
             handleArticleRequest={props.handleArticleRequest}
             onHandleError={props.onHandleError}
-        />
-        }
+            handleBookmarkUnsavedClick={props.handleBookmarkUnsavedClick}
+        />}
         <About />
       </main>
     );
