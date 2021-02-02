@@ -54,13 +54,6 @@ function App() {
   // <-- авторизация
 
   function handleError(err) {
-    // renderError(`Ошибка: ${err}`);
-    /*let message = err;
-    debugger;
-    if (err.data.message) {
-      message = err.message;
-    }
-    */
     handleInfoTooltipOpen(`Что-то пошло не так: \n ${err.data.message || err}`);
 
     console.log('Ошибка: ', err);
@@ -145,7 +138,6 @@ function App() {
   function handleSearchArticles(keyword) {
     setSearchArticlesArray([]);
     setNotFound(false);
-    // setValueSearchInputError(false);
     setIsPreloaderOpen(true);
     setRowArticles(3);
     getArticlesFromAPI(keyword);
@@ -286,7 +278,7 @@ function App() {
       // eslint-disable-next-line consistent-return
       getContent(token).then((res) => {
         if (res.data.email) {
-          setUserName(res.data.name);
+          setCurrentUser(res.data);
           setLoggedIn(true);
         } else {
           return new Promise().reject();

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import Link from '../Link/Link';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Buttons/Button/Button';
@@ -7,10 +6,12 @@ import ButtonMobileMenu from '../Buttons/ButtonMobileMenu/ButtonMobileMenu';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import logoutImgMain from '../../images/icons/logout-main.svg';
 import logoutImgSavedNews from '../../images/icons/logout-saved-news.svg';
+import CurrentUserContext from '../../contexts/currentUserContext';
 
 import './Header.css';
 
 function Header(props) {
+  const currentUser = React.useContext(CurrentUserContext);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = React.useState(false);
   const [useMobileMenu, setUseMobileMenu] = React.useState(false);
   const main = (props.pathname === '/' || isMobileMenuOpened);
@@ -86,7 +87,7 @@ function Header(props) {
               classNameBtn={logout}
               className={`button_type_${logout}`}
               image={true}
-              title={props.userName}
+              title={currentUser.name || 'Пользователь'}
               src={logoutImg}
               alt='Выход'
               onClick={props.handleSignOut}

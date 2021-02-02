@@ -1,8 +1,10 @@
 import React from 'react';
+import CurrentUserContext from '../../contexts/currentUserContext';
 import { declOfNum } from '../../utils/utils.js';
 import './SavedNewsHeader.css';
 
 const SavedNewsHeader = (props) => {
+  const currentUser = React.useContext(CurrentUserContext);
     const savedText = declOfNum(props.articles.length,
     ['сохранённая статья', 'сохранённые статьи', 'сохранённых статей']);
 
@@ -48,7 +50,7 @@ const SavedNewsHeader = (props) => {
   return (
     <section className='saved-news-header'>
       <h2 className='saved-news-header__title'>Сохранённые статьи</h2>
-      <p className='saved-news-header__subtitle'>{`${props.userName}, у Вас ${props.articles.length === 0 ? 'ещё нет' : props.articles.length} ${savedText}`}</p>
+      <p className='saved-news-header__subtitle'>{`${currentUser.name}, у Вас ${props.articles.length === 0 ? 'ещё нет' : props.articles.length} ${savedText}`}</p>
       {props.articles.length !== 0
         && <p className='saved-news-header__text'>
         По ключевым словам:&nbsp;{showKeywords()}
