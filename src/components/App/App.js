@@ -287,6 +287,7 @@ function App() {
       })
         .catch(() => handleInfoTooltipOpen('Что-то пошло не так! Проблемы с токеном.'));
     } else {
+      setSearchArticlesArray(articles);
       setLoggedIn(false);
       setCurrentUser({});
     }
