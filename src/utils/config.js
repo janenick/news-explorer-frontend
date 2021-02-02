@@ -1,6 +1,6 @@
 export const news_api_url = 'https://newsapi.org/v2/everything';
 export const news_api_key = '918e8c3927a1487bb4a57725910cbd78';
-export const pageSize = 4; // макс. допустимое кол-во статей
+export const pageSize = 100; // макс. допустимое кол-во статей
 export const news_search_error = 'Не удалось получить доступ к серверу новостей. Попробуйте еще раз.';
 
 // дата (запросы к newsapi за 7 дней от текущей даты)

@@ -11,6 +11,7 @@ import LoginPopup from '../Popups/LoginPopup/LoginPopup';
 import RegisterPopup from '../Popups/RegisterPopup/RegisterPopup';
 import InfoTooltip from '../Popups/InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import articles from '../../utils/allNews';
 
@@ -346,8 +347,8 @@ function App() {
     }
   }, [savedArticlesArray, loggedIn, searchMarker]);
 
+  // выход из профиля
   const handleSignOut = () => {
-    // выход из профиля
     localStorage.removeItem('token');
     localStorage.removeItem('searchedArticles');
     setUserName('');
@@ -413,17 +414,16 @@ function App() {
               handleBookmarkUnsavedClick={() => handleLoginPopupOpen()}
             />
           </Route>
-          <Route path='/saved-news'> {/* Сохраненные новости */}
-            <SavedNews
-              loggedIn={loggedIn}
-              pathname={pathname}
-              userName={userName}
-              articles={savedArticlesArray}
-              screenWidth={screenWidth}
-              onHandleError={handleError}
-              onArticleDelete={handleArticleDelete}
-            />
-          </Route>
+          <ProtectedRoute exact path='/saved-news'
+            component={SavedNews}
+            loggedIn={loggedIn}
+            pathname={pathname}
+            userName={userName}
+            articles={savedArticlesArray}
+            screenWidth={screenWidth}
+            onHandleError={handleError}
+            onArticleDelete={handleArticleDelete}
+          />
         </Switch>
         <Footer screenWidth={screenWidth} />
 
