@@ -4,8 +4,13 @@ import {
   data_from,
   data_to,
   pageSize,
-  news_search_error,
 } from './config';
+
+
+const checkResponce = (res) => new Promise((resolve, reject) => {
+  const func = res.status < 400 ? resolve : reject;
+  res.json().then(func);
+});
 
 export const searchArticles = (keyword) => {
   const url = news_api_url
@@ -19,10 +24,5 @@ export const searchArticles = (keyword) => {
   return fetch(url, {
     method: 'GET',
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return new Promise().reject(new Error(`${news_search_error} (Ошибка: ${res.status})`));
-    });
+    .then(checkResponce);
 };

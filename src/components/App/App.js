@@ -41,6 +41,7 @@ function App() {
   const [rowArticles, setRowArticles] = React.useState(3);
   const [searchMarker, setSearchMarker] = React.useState(true);
   const [notFound, setNotFound] = React.useState(false);
+  const [searchError, setSearchError] = React.useState(false);
   const { pathname } = useLocation();
 
   // --> авторизация
@@ -133,7 +134,10 @@ function App() {
           setNotFound(true);
         }
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        setSearchError(true);
+        console.log(err);
+      })
       .finally(() => { setIsPreloaderOpen(false) });
   }
   function handleSearchArticles(keyword) {
@@ -287,7 +291,7 @@ function App() {
       })
         .catch(() => handleInfoTooltipOpen('Что-то пошло не так! Проблемы с токеном.'));
     } else {
-      setSearchArticlesArray(articles);
+      // setSearchArticlesArray(articles);
       setLoggedIn(false);
       setCurrentUser({});
     }
@@ -408,6 +412,7 @@ function App() {
               handleShowMoreArticles={handleShowMoreArticles}
               handleSearchArticles={handleSearchArticles}
               notFound={notFound}
+              searchError={searchError}
               onAddArticle={handleAddArticle}
               onArticleDelete={handleArticleDelete}
               handleArticleRequest={handleArticleRequest}
