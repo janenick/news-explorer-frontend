@@ -1,5 +1,4 @@
 import React from 'react';
-// import CurrentUserContext from '../contexts/currentUserContext';
 import NoResults from '../NoResults/NoResults';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
@@ -20,7 +19,6 @@ function Main(props) {
         handleShowMoreArticles={props.handleShowMoreArticles}
         onAddArticle={props.onAddArticle}
         onArticleDelete={props.onArticleDelete}
-        handleArticleRequest={props.handleArticleRequest}
         onHandleError={props.onHandleError}
         handleBookmarkUnsavedClick={props.handleBookmarkUnsavedClick}
       />}

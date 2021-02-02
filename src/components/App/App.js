@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Route, Switch, useLocation, useHistory,
+  Route, Switch, Redirect, useLocation, useHistory,
 } from 'react-router-dom';
 
 import Header from '../Header/Header';
@@ -20,7 +20,6 @@ import {
   getArticlesFromServer,
   addNewArticle,
   removeArticle,
-  getUserInfo,
   register,
   authorize,
   getContent,
@@ -58,28 +57,9 @@ function App() {
   function handleError(err) {
     handleInfoTooltipOpen(`Что-то пошло не так: \n ${err.data.message || err}`);
 
-    console.log('Ошибка: ', err);
+    //console.log('Ошибка: ', err);
   }
 
-  const handleArticleRequest = ({
-    keyword,
-    title,
-    text,
-    date,
-    source,
-    link,
-    image,
-  }) => {
-    return addNewArticle({
-      keyword,
-      title,
-      text,
-      date,
-      source,
-      link,
-      image,
-    })
-  }
 
   function handleAddArticle(article) {
     const token = localStorage.getItem('token');
@@ -136,7 +116,7 @@ function App() {
       })
       .catch((err) => {
         setSearchError(true);
-        console.log(err);
+        //console.log(err);
       })
       .finally(() => { setIsPreloaderOpen(false) });
   }
@@ -297,12 +277,6 @@ function App() {
     }
   };
 
-  React.useEffect(() => {
-    getUserInfo().then((initialUserInfo) => {
-      setCurrentUser(initialUserInfo);
-    })
-      .catch((err) => console.error(err));
-  }, []);
 
   React.useEffect(() => {
     tokenCheck();
@@ -356,8 +330,7 @@ function App() {
   const handleSignOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('searchedArticles');
-    setUserName('');
-
+    setCurrentUser({});
     setLoggedIn(false);
     setSearchArticlesArray([]);
     history.push('/');
@@ -415,7 +388,6 @@ function App() {
               searchError={searchError}
               onAddArticle={handleAddArticle}
               onArticleDelete={handleArticleDelete}
-              handleArticleRequest={handleArticleRequest}
               onHandleError={handleError}
               handleBookmarkUnsavedClick={() => handleLoginPopupOpen()}
             />
@@ -429,7 +401,11 @@ function App() {
             screenWidth={screenWidth}
             onHandleError={handleError}
             onArticleDelete={handleArticleDelete}
+            setIsLoginPopupOpen={setIsLoginPopupOpen}
           />
+          <Route>
+            {<Redirect to='/' />}
+          </Route>
         </Switch>
         <Footer screenWidth={screenWidth} />
 

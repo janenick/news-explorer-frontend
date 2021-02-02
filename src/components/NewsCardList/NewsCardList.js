@@ -25,9 +25,7 @@ function NewsCardList(props) {
             {props.articles.slice(0, props.rowArticles).map((card, i) => <NewsCard
               key={i} card={card} tooltip={tooltip} iconSave={iconSave}
               onAddArticle={props.onAddArticle}
-              onArticleDelete={props.onArticleDelete}
               loggedIn={props.loggedIn}
-              handleArticleRequest={props.handleArticleRequest}
               onHandleError={props.onHandleError}
               handleBookmarkUnsavedClick={props.handleBookmarkUnsavedClick}
               screenWidth={props.screenWidth}/>)}

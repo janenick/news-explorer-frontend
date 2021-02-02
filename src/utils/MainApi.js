@@ -10,16 +10,6 @@ const checkResponce = (res) => new Promise((resolve, reject) => {
 });
 
 
-const getUserInfo = () => fetch(`${baseUrl}/users/me`, {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  },
-  method: 'GET',
-})
-  .then(checkResponce);
-
-
 const getArticlesFromServer = () => fetch(`${baseUrl}/articles`, {
   headers: {
     'Content-Type': 'application/json',
@@ -95,8 +85,9 @@ const getContent = (token) => fetch(`${baseUrl}/users/me`, {
 })
   .then(checkResponce);
 
+
 export {
-  getUserInfo,
+ // getUserInfo,
   getArticlesFromServer,
   addNewArticle,
   removeArticle,

@@ -1,11 +1,12 @@
 import React from 'react';
-
+import CurrentUserContext from '../../contexts/currentUserContext';
 import Navigation from '../Navigation/Navigation';
 import Button from '../Buttons/Button/Button';
 import logoutImgMain from '../../images/icons/logout-main.svg';
 import './MobileMenu.css';
 
 const MobileMenu = (props) => {
+  const currentUser = React.useContext(CurrentUserContext);
   return (
 
     <div className='mobile-menu mobile-menu_opened'>
@@ -17,7 +18,7 @@ const MobileMenu = (props) => {
             classNameBtn='mobile'
             className={`button_type_mobile`}
             image={true}
-            title='Грета'
+            title={currentUser.name || 'Пользователь'}
             src={logoutImgMain}
             alt='Выход'
             onClick={props.handleSignOut}
