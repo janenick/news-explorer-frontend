@@ -63,6 +63,7 @@
   color: #1a1b22;
   box-sizing: border-box;
   padding-left: 24px;
+  padding-right: 4px;
 }
 
 .search-form__input::placeholder {

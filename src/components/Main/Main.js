@@ -18,6 +18,7 @@ function Main(props) {
             screenWidth={props.screenWidth}
             handleShowMoreArticles={props.handleShowMoreArticles}
             onAddArticle={props.onAddArticle}
+            onArticleDelete={props.onArticleDelete}
             handleArticleRequest={props.handleArticleRequest}
             onHandleError={props.onHandleError}
             handleBookmarkUnsavedClick={props.handleBookmarkUnsavedClick}

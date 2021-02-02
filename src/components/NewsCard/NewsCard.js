@@ -5,45 +5,13 @@ import './NewsCard.css';
 
 const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArticleRequest, onHandleError, onArticleDelete, handleBookmarkUnsavedClick, screenWidth }) => {
   // const currentUser = React.useContext(CurrentUserContext);
-  const [isSavedMark, setIsSavedMark] = React.useState(false);
-
-  function toggleSavedMark() {
-    setIsSavedMark(!isSavedMark);
-  }
-
-/*  function handleSavedMark() {
-    // isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
-    console.log('card.isSavedMark', isSavedMark);
-    if (isSavedMark) {
-      setIsSavedMark(false);
-    } else {
-      handleArticleRequest({
-        keyword: card.keyword,
-        title: card.title,
-        text: card.text,
-        date: card.date,
-        source: card.source,
-        link: card.link,
-        image: card.image,
-      }).then((newArticle) => {
-        console.log('newArticle:', newArticle);
-        card._id = newArticle._id;
-        console.log('card:', card);
-        setIsSavedMark(true);
-      })
-        .catch(err => onHandleError(`Статья не сохранилась. Ошибка: ${err}`));
-    }
-  }
-  */
 
   function handleSavedMark() {
-    // isSavedMark ? setIsSavedMark(false) : setIsSavedMark(true)
     if (!loggedIn) {
       handleBookmarkUnsavedClick();
     }
     if (card.isSaved) {
-      // setIsSavedMark(false);
-      console.log('убираем флажок');
+      onArticleDelete(card);
     } else {
       onAddArticle(card);
     }
@@ -51,8 +19,7 @@ const NewsCard = ({ card, tooltip, iconSave, loggedIn, onAddArticle, handleArtic
 
   function handleDeleteClick() {
     onArticleDelete(card);
-    console.log('handleDeleteClick.card', card);
-  }
+      }
 
   function makeTitle(str, title = true) {
     let strLength = 146;

@@ -15,8 +15,15 @@ import Preloader from '../Preloader/Preloader';
 import articles from '../../utils/allNews';
 
 import CurrentUserContext from '../../contexts/currentUserContext';
-import mainApi from '../../utils/mainApi';
-import * as auth from '../../utils/auth';
+import {
+  getArticlesFromServer,
+  addNewArticle,
+  removeArticle,
+  getUserInfo,
+  register,
+  authorize,
+  getContent,
+} from '../../utils/mainApi';
 import { searchArticles } from '../../utils/newsApi';
 import { converter } from '../../utils/utils.js';
 
@@ -31,6 +38,7 @@ function App() {
   const [searchArticlesArray, setSearchArticlesArray] = React.useState([]);
   const [savedArticlesArray, setSavedArticlesArray] = React.useState([]);
   const [rowArticles, setRowArticles] = React.useState(3);
+  const [searchMarker, setSearchMarker] = React.useState(true);
   const [notFound, setNotFound] = React.useState(false);
   const { pathname } = useLocation();
 
@@ -47,7 +55,14 @@ function App() {
 
   function handleError(err) {
     // renderError(`Ошибка: ${err}`);
-    handleInfoTooltipOpen(`Что-то пошло не так: \n ${err}`);
+    /*let message = err;
+    debugger;
+    if (err.data.message) {
+      message = err.message;
+    }
+    */
+    handleInfoTooltipOpen(`Что-то пошло не так: \n ${err.data.message || err}`);
+
     console.log('Ошибка: ', err);
   }
 
@@ -60,7 +75,7 @@ function App() {
     link,
     image,
   }) => {
-    return mainApi.addNewArticle({
+    return addNewArticle({
       keyword,
       title,
       text,
@@ -72,21 +87,25 @@ function App() {
   }
 
   function handleAddArticle(article) {
-    console.log('handleAddArticle', article);
     const token = localStorage.getItem('token');
     if (!token) {
       return;
     }
-      setIsPreloaderOpen(true);
-      mainApi.addNewArticle(article).then((newArticle) => {
 
-        console.log('newArticle:', newArticle);
-        article._id = newArticle._id;
+    const saved = savedArticlesArray
+      .find((i) => i.title === article.title
+        && i.date === article.date
+        && i.source === article.source);
+
+    if (saved && article._id.indexOf(article.title) === -1) {
+      handleArticleDelete(saved);
+    } else {
+      setIsPreloaderOpen(true);
+      addNewArticle(article).then((newArticle) => {
+        article._id = newArticle.data._id;
         article.isSaved = true;
-        console.log('article:', article);
         // Обновляем стейт карточек
-       // setSearchArticlesArray([newArticle, ...searchArticlesArray]);
-        setSavedArticlesArray([newArticle, ...savedArticlesArray]);
+        setSavedArticlesArray([newArticle.data, ...savedArticlesArray]);
       })
         .catch((err) => {
           handleError(err);
@@ -94,30 +113,16 @@ function App() {
         .finally(() => {
           setIsPreloaderOpen(false);
         });
+    }
   }
-
-  /* function convertArticlesArray(articlesArray, keyword) {
-    const newArray = articlesArray.map(article => ({
-      _id: '',
-      isSaved: false,
-      keyword: keyword,
-      title: article.title,
-      text: article.description,
-      date: article.publishedAt,
-      source: article.source.name,
-      link: article.url,
-      image: article.urlToImage,
-    }));
-    return newArray;
-  }
-  */
 
   function handleShowMoreArticles() {
     setRowArticles(rowArticles + 3);
   }
 
-  function getArticlesFromAPI(keyword) {
-    const searchWord = '' + keyword.trim();
+  function getArticlesFromAPI(values) {
+    const { keyword } = values;
+    const searchWord = '' + keyword.trim().toLowerCase();
     if (searchWord.length === 0) {
       handleInfoTooltipOpen('Введите непустое слово.');
       setIsPreloaderOpen(false);
@@ -129,7 +134,8 @@ function App() {
         if (data.articles.length !== 0) {
           const convertArticles = converter(data.articles, searchWord);
           setSearchArticlesArray(convertArticles);
-           } else {
+          setSearchMarker(!searchMarker);
+        } else {
           setNotFound(true);
         }
       })
@@ -145,9 +151,11 @@ function App() {
     getArticlesFromAPI(keyword);
   }
 
+
   function handleArticleDelete(article) {
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    mainApi.removeArticle(article._id).then(() => {
+    setIsPreloaderOpen(true);
+    removeArticle(article._id).then(() => {
       // Создаем копию массива, исключив из него удалённую карточку
       const newArticles = savedArticlesArray.filter((art) => art._id !== article._id);
       // Обновляем стейт
@@ -155,7 +163,8 @@ function App() {
     })
       .catch((err) => {
         handleError(err);
-      });
+      })
+      .finally(() => { setIsPreloaderOpen(false) });
   }
 
   function onSetErrorStatus(status, message) {
@@ -195,7 +204,7 @@ function App() {
     setIsRegisterPopupOpen(true);
   }
   const handleRegister = (userData) => {
-    auth.register(userData.email, userData.password, userData.name)
+    register(userData.email, userData.password, userData.name)
       .then((res) => {
         if (res.data.email) {
           setIsRegisterPopupOpen(false);
@@ -221,13 +230,14 @@ function App() {
 
   // --> авторизация
   const handleLogin = (userData) => {
-    auth.authorize(userData.email, userData.password)
+    authorize(userData.email, userData.password)
       .then((res) => {
-        auth.getContent(res.data.token).then((user) => {
+        getContent(res.data.token).then((user) => {
           if (user.data) {
             setCurrentUser(user.data);
 
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('searchedArticles', savedArticlesArray);
             setUserName(user.data.name);
             setLoggedIn(true);
             setIsLoginPopupOpen(false);
@@ -246,11 +256,35 @@ function App() {
       });
   }
 
+
+  // проверка сохранена ли уже найденная статья
+  const checkSavedArticles = () => {
+    if (searchArticlesArray.length) {
+      const savedLinks = savedArticlesArray.map(({ link }) => link);
+      const markedArticles = searchArticlesArray.map((article) => {
+        const isSaved = savedLinks.includes(article.link);
+        const saved = isSaved
+          ? savedArticlesArray.find((item) => item.link === article.link)
+          : article;
+        return { ...saved, isSaved };
+      });
+      setSearchArticlesArray(markedArticles);
+    }
+  };
+
+  // при выходе найденным статьям установить 'isSaved: false'
+  const clearIsSavedOnLogout = () => {
+    if (searchArticlesArray.length) {
+      const markedArticles = searchArticlesArray.map((article) => ({ ...article, isSaved: false }));
+      setSearchArticlesArray(markedArticles);
+    }
+  };
+
   const tokenCheck = () => {
     const token = localStorage.getItem('token');
     if (token) {
       // eslint-disable-next-line consistent-return
-      auth.getContent(token).then((res) => {
+      getContent(token).then((res) => {
         if (res.data.email) {
           setUserName(res.data.name);
           setLoggedIn(true);
@@ -259,11 +293,14 @@ function App() {
         }
       })
         .catch(() => handleInfoTooltipOpen('Что-то пошло не так! Проблемы с токеном.'));
+    } else {
+      setLoggedIn(false);
+      setCurrentUser({});
     }
   };
 
   React.useEffect(() => {
-    mainApi.getUserInfo().then((initialUserInfo) => {
+    getUserInfo().then((initialUserInfo) => {
       setCurrentUser(initialUserInfo);
     })
       .catch((err) => console.error(err));
@@ -275,12 +312,29 @@ function App() {
   }, []);
 
   React.useEffect(() => {
+    const articles = JSON.parse(localStorage.getItem('searchedArticles')) || [];
+    if (articles.length) {
+      setSearchArticlesArray(articles);
+    }
+  }, []);
+
+  // сохраняем найденные статьи для повторного открытия страницы
+  React.useEffect(() => {
+    localStorage.setItem('searchedArticles', JSON.stringify(searchArticlesArray));
+  }, [searchArticlesArray]);
+
+
+  React.useEffect(() => {
     if (loggedIn) {
-      mainApi.getArticlesFromServer().then((initialArticleList) => {
-        const articleList = initialArticleList.reverse().map((article) => article);
+      setIsPreloaderOpen(false);
+      getArticlesFromServer().then((initialArticleList) => {
+        const articleList = initialArticleList.data.reverse().map((article) => ({ isSaved: true, ...article }));
         setSavedArticlesArray(articleList);
       })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => {
+          setIsPreloaderOpen(false);
+        });
     }
   }, [loggedIn]);
 
@@ -291,12 +345,23 @@ function App() {
     // eslint-disable-next-line
   }, [loggedIn]);
 
+  // синхронизируем найденные и сохраненные статьи
+  React.useEffect(() => {
+    if (savedArticlesArray.length && loggedIn) {
+      checkSavedArticles();
+    } else {
+      clearIsSavedOnLogout();
+    }
+  }, [savedArticlesArray, loggedIn, searchMarker]);
+
   const handleSignOut = () => {
     // выход из профиля
     localStorage.removeItem('token');
+    localStorage.removeItem('searchedArticles');
     setUserName('');
 
     setLoggedIn(false);
+    setSearchArticlesArray([]);
     history.push('/');
   };
   // <-- авторизация
@@ -350,6 +415,7 @@ function App() {
               handleSearchArticles={handleSearchArticles}
               notFound={notFound}
               onAddArticle={handleAddArticle}
+              onArticleDelete={handleArticleDelete}
               handleArticleRequest={handleArticleRequest}
               onHandleError={handleError}
               handleBookmarkUnsavedClick={() => handleLoginPopupOpen()}

@@ -2,43 +2,48 @@ import { main_url } from './config';
 
 const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || main_url}`;
 
-const _handleError = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-
-  console.log('Неудачный запрос fentch');
-  return Promise.reject(res.status);
-};
-
-class MainApi {
-  constructor({ baseApiUrl, headers }) {
-    this._baseUrl = baseApiUrl;
-    this._headers = headers;
-  }
-
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then(_handleError);
-  }
+const checkResponce = (res) => new Promise((resolve, reject) => {
+  const func = res.status < 400 ? resolve : reject;
+  res.json().then((data) => {
+    func({ status: res.status, data });
+  });
+});
 
 
-  getArticlesFromServer() {
-    return fetch(`${this._baseUrl}/articles`, {
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then(_handleError);
-  }
+const getUserInfo = () => fetch(`${baseUrl}/users/me`, {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'GET',
+})
+  .then(checkResponce);
 
-  addNewArticle({
+
+const getArticlesFromServer = () => fetch(`${baseUrl}/articles`, {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  method: 'GET',
+})
+  .then(checkResponce);
+
+const addNewArticle = ({
+  keyword,
+  title,
+  text,
+  date,
+  source,
+  link,
+  image,
+}) => fetch(`${baseUrl}/articles`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+  body: JSON.stringify({
     keyword,
     title,
     text,
@@ -46,45 +51,56 @@ class MainApi {
     source,
     link,
     image,
-  }) {
-    return fetch(`${this._baseUrl}/articles`, {
-      method: 'POST',
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify({
-          keyword,
-          title,
-          text,
-          date,
-          source,
-          link,
-          image,
-      }),
-    })
-      .then(_handleError);
-  }
+  }),
+})
+  .then(checkResponce);
 
-  removeArticle(id) {
-    return fetch(`${this._baseUrl}/articles/${id}`, {
-      method: 'DELETE',
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then(_handleError);
-  }
-}
-
-const mainApi = new MainApi(
-  {
-    baseApiUrl: baseUrl,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+const removeArticle = (id) => fetch(`${baseUrl}/articles/${id}`, {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
-);
+})
+  .then(checkResponce);
 
-export default mainApi;
+const register = (email, password, name) => fetch(`${baseUrl}/signup`, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ email, password, name }),
+})
+  .then(checkResponce);
+
+
+const authorize = (email, password) => fetch(`${baseUrl}/signin`, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ email, password }),
+})
+  .then(checkResponce);
+
+const getContent = (token) => fetch(`${baseUrl}/users/me`, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+})
+  .then(checkResponce);
+
+export {
+  getUserInfo,
+  getArticlesFromServer,
+  addNewArticle,
+  removeArticle,
+  register,
+  authorize,
+  getContent,
+}

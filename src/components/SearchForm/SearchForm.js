@@ -5,17 +5,18 @@ import Button from '../Buttons/Button/Button';
 import './SearchForm.css';
 
 function SearchForm(props) {
-  const [value, setValue] = React.useState('');
+  const [values, setValues] = React.useState({
+    keyword: '',
+  });
 
   function handleValueInputSearchChange(evt) {
-    setValue(evt.target.value);
+    const { name, value } = evt.target;
+    setValues({ ...values, [name]: value });
 
   }
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.handleSearchArticles(value);
-    setValue('');
-
+    props.handleSearchArticles(values);
   }
 
   return (
@@ -25,14 +26,18 @@ function SearchForm(props) {
         <p className='search-form__subtitle'>Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
         <div className='search-form__input-container'>
           <input className='search-form__input' placeholder='Введите тему новости'
+            type='text'
+            name='keyword'
             required={true}
-            value={value}
+            value={values.keyword}
             onChange={handleValueInputSearchChange}
+            autoComplete='off'
           >
           </input>
           <Button
             classNameBtn='search-form'
             className='button_type_search-form button_type_link'
+            type='submit'
             image={false}
             title='Искать'
             onClick={handleSubmit}
