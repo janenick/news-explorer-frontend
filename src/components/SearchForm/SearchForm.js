@@ -24,7 +24,7 @@ function SearchForm(props) {
       <div className='search-form__container'>
         <h1 className='search-form__title'>Что творится в мире?</h1>
         <p className='search-form__subtitle'>Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
-        <div className='search-form__input-container'>
+        <form className='search-form__input-container' onSubmit={handleSubmit}>
           <input className='search-form__input' placeholder='Введите тему новости'
             type='text'
             name='keyword'
@@ -40,9 +40,9 @@ function SearchForm(props) {
             type='submit'
             image={false}
             title='Искать'
-            onClick={handleSubmit}
+
           />
-        </div>
+        </form>
       </div>
     </section>
   );
