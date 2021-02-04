@@ -23,7 +23,7 @@ import {
   getContent,
 } from '../../utils/MainApi.js';
 import { searchArticles } from '../../utils/NewsApi';
-import { converter } from '../../utils/utils.js';
+import { converter } from '../../utils/utils';
 
 function App() {
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
