@@ -1,6 +1,6 @@
-import { main_url } from './config';
+import { MAIN_URL } from './config';
 
-const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || main_url}`;
+const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || MAIN_URL}`;
 
 const checkResponce = (res) => new Promise((resolve, reject) => {
   const func = res.status < 400 ? resolve : reject;

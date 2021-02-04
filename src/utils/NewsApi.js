@@ -1,9 +1,9 @@
 import {
-  news_api_url,
-  news_api_key,
-  data_from,
-  data_to,
-  pageSize,
+  NEWS_API_URL,
+  NEWS_API_KEY,
+  DATA_FROM,
+  DATA_TO,
+  PAGESIZE,
 } from './config';
 
 
@@ -13,12 +13,12 @@ const checkResponce = (res) => new Promise((resolve, reject) => {
 });
 
 export const searchArticles = (keyword) => {
-  const url = news_api_url
+  const url = NEWS_API_URL
     + '?q=' + keyword
-    + '&apiKey=' + news_api_key
-    + '&from=' + data_from
-    + '&to=' + data_to
-    + '&pageSize=' + pageSize
+    + '&apiKey=' + NEWS_API_KEY
+    + '&from=' + DATA_FROM
+    + '&to=' + DATA_TO
+    + '&pageSize=' + PAGESIZE
     + '&sortBy=publishedAt';
 
   return fetch(url, {

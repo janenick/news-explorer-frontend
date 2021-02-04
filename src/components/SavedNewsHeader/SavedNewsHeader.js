@@ -39,9 +39,13 @@ const SavedNewsHeader = (props) => {
       </>;
     } else {
       result = <>
-        <span className='saved-news-header__text-span'>{sortedKey[0]}, {sortedKey[1]}</span>
+        <span className='saved-news-header__text-span'>
+          {sortedKey[0]}, {sortedKey[1]}
+        </span>
         &nbsp;и&nbsp;
-        <span span className='saved-news-header__text-span' > {sortedKey.length - 2}-м другим</span>
+        <span className='saved-news-header__text-span' >
+          {sortedKey.length - 2}-м другим
+          </span>
       </>;
     }
     return result;
