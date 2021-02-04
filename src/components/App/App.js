@@ -21,8 +21,8 @@ import {
   register,
   authorize,
   getContent,
-} from '../../utils/mainApi.js';
-import { searchArticles } from '../../utils/newsApi.js';
+} from '../../utils/MainApi.js';
+import { searchArticles } from '../../utils/NewsApi';
 import { converter } from '../../utils/utils.js';
 
 function App() {
