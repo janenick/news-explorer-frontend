@@ -13,8 +13,6 @@ import InfoTooltip from '../Popups/InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import articles from '../../utils/allNews';
-
 import CurrentUserContext from '../../contexts/currentUserContext';
 import {
   getArticlesFromServer,
@@ -23,8 +21,8 @@ import {
   register,
   authorize,
   getContent,
-} from '../../utils/mainApi';
-import { searchArticles } from '../../utils/newsApi';
+} from '../../utils/mainApi.js';
+import { searchArticles } from '../../utils/newsApi.js';
 import { converter } from '../../utils/utils.js';
 
 function App() {
