@@ -54,8 +54,6 @@ function App() {
 
   function handleError(err) {
     handleInfoTooltipOpen(`Что-то пошло не так: \n ${err.data.message || err}`);
-
-    //console.log('Ошибка: ', err);
   }
 
 
@@ -114,7 +112,6 @@ function App() {
       })
       .catch((err) => {
         setSearchError(true);
-        //console.log(err);
       })
       .finally(() => { setIsPreloaderOpen(false) });
   }
