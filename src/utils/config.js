@@ -1,4 +1,4 @@
-export const NEWS_API_URL = 'https://newsapi.org/v2/everything';
+export const NEWS_API_URL = 'https://nomoreparties.co/news/v2/everything';
 export const NEWS_API_KEY = '918e8c3927a1487bb4a57725910cbd78';
 export const PAGESIZE = 100; // макс. допустимое кол-во статей
 
