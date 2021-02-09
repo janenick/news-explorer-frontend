@@ -1,6 +1,7 @@
 export const NEWS_API_URL = 'https://nomoreparties.co/news/v2/everything';
 export const NEWS_API_KEY = '918e8c3927a1487bb4a57725910cbd78';
 export const PAGESIZE = 100; // макс. допустимое кол-во статей
+export const ARTICLE_NUMBER = 3; // кол-во статей, добавляемое для показа
 
 // дата (запросы к newsapi за 7 дней от текущей даты)
 const locales = 'sv'; // 2021-01-31

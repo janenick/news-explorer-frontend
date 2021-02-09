@@ -24,6 +24,7 @@ import {
 } from '../../utils/MainApi.js';
 import { searchArticles } from '../../utils/NewsApi';
 import { converter } from '../../utils/utils';
+import { ARTICLE_NUMBER } from '../../utils/config';
 
 function App() {
   const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
@@ -35,7 +36,7 @@ function App() {
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [searchArticlesArray, setSearchArticlesArray] = React.useState([]);
   const [savedArticlesArray, setSavedArticlesArray] = React.useState([]);
-  const [rowArticles, setRowArticles] = React.useState(3);
+  const [rowArticles, setRowArticles] = React.useState(ARTICLE_NUMBER);
   const [searchMarker, setSearchMarker] = React.useState(true);
   const [notFound, setNotFound] = React.useState(false);
   const [searchError, setSearchError] = React.useState(false);
@@ -88,7 +89,7 @@ function App() {
   }
 
   function handleShowMoreArticles() {
-    setRowArticles(rowArticles + 3);
+    setRowArticles(rowArticles + ARTICLE_NUMBER);
   }
 
   function getArticlesFromAPI(values) {
