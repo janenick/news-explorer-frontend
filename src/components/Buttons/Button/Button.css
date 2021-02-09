@@ -1,0 +1,153 @@
+.button {
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  height: 48px;
+  padding-left: 19px;
+  padding-right: 19px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover {
+  opacity: 0.9;
+  transition: background 0.6s ease;
+}
+
+.button_type:disabled {
+  background: #e6e8eb;
+  border: none;
+}
+
+.button_type_search-form {
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  height: 64px;
+  width: 168px;
+  border: none;
+}
+
+.button_type_link {
+  background: #2f71e5;
+  transition: background 0.6s ease;
+}
+.button_type_link:hover {
+  background: #347eff;
+}
+
+.button_type_link:active {
+  background: #2a65cc;
+}
+
+.button_type_popup {
+  background: #2f71e5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  margin-top: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  border: none;
+}
+
+.button_type_disabled {
+  width: 100%;
+  background: #e6e8eb;
+  border: none;
+}
+
+.button_type_auth {
+  border: 1px solid #ffffff;
+}
+
+.button_type_logout-main {
+  border: 1px solid #ffffff;
+}
+
+.button_type_logout-saved-news {
+  border: 1px solid #1a1b22;
+}
+
+.button_type_more-results {
+  background: #ffffff;
+  border-radius: 80px;
+  border: none;
+}
+
+.button_type_mobile {
+  border: 1px solid #ffffff;
+  width: 100%;
+}
+
+.button_type_auth-mobile {
+  width: 100%;
+}
+
+.button__img {
+  margin-left: 10px;
+}
+
+.button__text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.button__text_type_search-form {
+  color: #ffffff;
+}
+
+.button__text_type_popup {
+  color: #ffffff;
+}
+
+.button__text_type_disabled {
+  color: #b6bcbf;
+}
+
+.button__text_type_auth {
+  color: #ffffff;
+}
+
+.button__text_type_logout-main {
+  color: #ffffff;
+}
+
+.button__text_type_logout-saved-news {
+  color: #1a1b22;
+}
+
+.button__text_type_mobile {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 800px) {
+  .button {
+    height: 40px;
+  }
+
+
+.button_type_search-form {
+  height: 64px;
+  width: 160px;
+}
+  .button__text {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .button {
+    width: 100%;
+    height: 56px;
+  }
+}

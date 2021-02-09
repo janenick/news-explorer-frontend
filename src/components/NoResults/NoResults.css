@@ -1,0 +1,43 @@
+.no-results {
+padding-top: 86px;
+padding-bottom: 80px;
+}
+.no-results__container {
+max-width: 356px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: 0 auto;
+}
+
+.no-results__title {
+font-family: 'Roboto Slab', Arial, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 30px;
+color: #1A1B22;
+margin-top: 40px;
+margin-bottom: 0;
+text-align: center;
+}
+
+.no-results__subtitle {
+font-family: 'Roboto', Arial, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 24px;
+color: #B6BCBF;
+text-align: center;
+
+margin-top: 40px;
+margin-bottom: 0;
+}
+
+.no-results__img {
+  width: 74px;
+  height: 74px;
+  background: url('../../images/icons/no-results.svg') center no-repeat;
+}

@@ -1,0 +1,32 @@
+.btn-mobile-menu__container{
+display: none;
+}
+
+.btn-mobile-menu__button {
+width: 24px;
+height: 24px;
+border: none;
+background: transparent;
+}
+
+.btn-mobile-menu__button:focus {
+  outline: none;
+}
+
+.btn-mobile-menu__button_type_close {
+  background-image: url('../../../images/icons/mobile-menu-main-close.svg');
+}
+
+.btn-mobile-menu__button_type_main {
+  background-image: url('../../../images/icons/mobile-menu-main.svg');
+}
+
+.btn-mobile-menu__button_type_saved-news {
+  background-image: url('../../../images/icons/mobile-menu-saved-news.svg');
+}
+
+@media screen and (max-width: 620px) {
+.btn-mobile-menu__container {
+display: block;
+}
+}
